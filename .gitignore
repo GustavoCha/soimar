@@ -1,0 +1,54 @@
+# Agent, skill and local tooling state
+.agents/
+.codex/
+.impeccable/
+.claude/
+.cursor/
+.grok/
+.gemini/
+
+# Cloud credentials and local configuration
+.aws/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Dependencies and generated build output
+node_modules/
+.npm/
+.pnpm-store/
+dist/
+build/
+coverage/
+.cache/
+.parcel-cache/
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+
+# Design-generation sources that are not required at runtime
+regions.json
+assets/**/*.prompt.txt

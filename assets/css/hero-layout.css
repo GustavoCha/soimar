@@ -1,0 +1,53 @@
+/* Measured layout for the approved desktop hero. */
+:root {
+  --r-masthead-x: 0.000%; --r-masthead-y: 0.000%; --r-masthead-w: 100.000%; --r-masthead-h: 9.580%;
+  --r-windshield-view-x: 4.730%; --r-windshield-view-y: 9.680%; --r-windshield-view-w: 90.540%; --r-windshield-view-h: 59.580%;
+  --r-windshield-frame-x: 0.000%; --r-windshield-frame-y: 8.470%; --r-windshield-frame-w: 100.000%; --r-windshield-frame-h: 69.760%;
+  --r-brand-x: 5.550%; --r-brand-y: 1.510%; --r-brand-w: 23.010%; --r-brand-h: 5.850%;
+  --r-brand-cap: 36px; --r-brand-font: 52px;
+  --r-primary-nav-x: 32.220%; --r-primary-nav-y: 1.510%; --r-primary-nav-w: 33.540%; --r-primary-nav-h: 5.850%;
+  --r-header-whatsapp-x: 71.560%; --r-header-whatsapp-y: 1.410%; --r-header-whatsapp-w: 23.960%; --r-header-whatsapp-h: 6.050%;
+  --r-lead-headline-x: 6.810%; --r-lead-headline-y: 17.040%; --r-lead-headline-w: 40.160%; --r-lead-headline-h: 20.260%;
+  --r-lead-headline-cap: 83px; --r-lead-headline-font: 119px; --r-lead-headline-family: 'Bakbak One'; --r-lead-headline-weight: 400;
+  --r-lead-promise-x: 7.940%; --r-lead-promise-y: 38.910%; --r-lead-promise-w: 39.220%; --r-lead-promise-h: 5.750%;
+  --r-lead-promise-cap: 34px; --r-lead-promise-font: 49px;
+  --r-lead-copy-x: 7.940%; --r-lead-copy-y: 46.170%; --r-lead-copy-w: 38.460%; --r-lead-copy-h: 6.350%;
+  --r-lead-copy-cap: 15px; --r-lead-copy-font: 22px;
+  --r-lead-disclaimer-x: 7.940%; --r-lead-disclaimer-y: 53.330%; --r-lead-disclaimer-w: 33.230%; --r-lead-disclaimer-h: 3.130%;
+  --r-lead-disclaimer-cap: 13px; --r-lead-disclaimer-font: 19px;
+  --r-diagnostic-progress-x: 51.580%; --r-diagnostic-progress-y: 16.530%; --r-diagnostic-progress-w: 40.540%; --r-diagnostic-progress-h: 9.580%;
+  --r-damage-piquete-x: 48.680%; --r-damage-piquete-y: 27.620%; --r-damage-piquete-w: 13.810%; --r-damage-piquete-h: 24.090%;
+  --r-damage-trizadura-x: 62.990%; --r-damage-trizadura-y: 27.620%; --r-damage-trizadura-w: 14.060%; --r-damage-trizadura-h: 24.090%;
+  --r-damage-varios-x: 77.550%; --r-damage-varios-y: 27.620%; --r-damage-varios-w: 14.120%; --r-damage-varios-h: 24.090%;
+  --r-hero-whatsapp-x: 50.060%; --r-hero-whatsapp-y: 53.130%; --r-hero-whatsapp-w: 40.480%; --r-hero-whatsapp-h: 7.460%;
+  --r-services-strip-x: 0.000%; --r-services-strip-y: 78.230%; --r-services-strip-w: 100.000%; --r-services-strip-h: 21.770%;
+  --r-services-heading-x: 3.590%; --r-services-heading-y: 81.750%; --r-services-heading-w: 92.430%; --r-services-heading-h: 3.830%;
+  --r-services-heading-cap: 3px; --r-services-heading-font: 5px;
+  --r-service-repair-x: 3.470%; --r-service-repair-y: 85.480%; --r-service-repair-w: 21.560%; --r-service-repair-h: 12.700%;
+  --r-service-replacement-x: 26.920%; --r-service-replacement-y: 85.480%; --r-service-replacement-w: 21.440%; --r-service-replacement-h: 12.700%;
+  --r-service-business-x: 50.130%; --r-service-business-y: 85.480%; --r-service-business-w: 21.440%; --r-service-business-h: 12.700%;
+  --r-service-workshop-x: 73.330%; --r-service-workshop-y: 85.480%; --r-service-workshop-w: 23.390%; --r-service-workshop-h: 12.700%;
+}
+
+.comp-frame { position: relative; width: 100%; aspect-ratio: 1586 / 992; overflow: hidden; }
+.r-masthead { position: absolute; left: var(--r-masthead-x); top: var(--r-masthead-y); width: var(--r-masthead-w); height: var(--r-masthead-h); }
+.r-windshield-view { position: absolute; left: var(--r-windshield-view-x); top: var(--r-windshield-view-y); width: var(--r-windshield-view-w); height: var(--r-windshield-view-h); }
+.r-windshield-frame { position: absolute; left: var(--r-windshield-frame-x); top: var(--r-windshield-frame-y); width: var(--r-windshield-frame-w); height: var(--r-windshield-frame-h); }
+.r-brand { position: absolute; left: var(--r-brand-x); top: var(--r-brand-y); width: var(--r-brand-w); height: var(--r-brand-h); }
+.r-primary-nav { position: absolute; left: var(--r-primary-nav-x); top: var(--r-primary-nav-y); width: var(--r-primary-nav-w); height: var(--r-primary-nav-h); }
+.r-header-whatsapp { position: absolute; left: var(--r-header-whatsapp-x); top: var(--r-header-whatsapp-y); width: var(--r-header-whatsapp-w); height: var(--r-header-whatsapp-h); }
+.r-lead-headline { position: absolute; left: var(--r-lead-headline-x); top: var(--r-lead-headline-y); width: var(--r-lead-headline-w); height: var(--r-lead-headline-h); }
+.r-lead-promise { position: absolute; left: var(--r-lead-promise-x); top: var(--r-lead-promise-y); width: var(--r-lead-promise-w); height: var(--r-lead-promise-h); }
+.r-lead-copy { position: absolute; left: var(--r-lead-copy-x); top: var(--r-lead-copy-y); width: var(--r-lead-copy-w); height: var(--r-lead-copy-h); }
+.r-lead-disclaimer { position: absolute; left: var(--r-lead-disclaimer-x); top: var(--r-lead-disclaimer-y); width: var(--r-lead-disclaimer-w); height: var(--r-lead-disclaimer-h); }
+.r-diagnostic-progress { position: absolute; left: var(--r-diagnostic-progress-x); top: var(--r-diagnostic-progress-y); width: var(--r-diagnostic-progress-w); height: var(--r-diagnostic-progress-h); }
+.r-damage-piquete { position: absolute; left: var(--r-damage-piquete-x); top: var(--r-damage-piquete-y); width: var(--r-damage-piquete-w); height: var(--r-damage-piquete-h); }
+.r-damage-trizadura { position: absolute; left: var(--r-damage-trizadura-x); top: var(--r-damage-trizadura-y); width: var(--r-damage-trizadura-w); height: var(--r-damage-trizadura-h); }
+.r-damage-varios { position: absolute; left: var(--r-damage-varios-x); top: var(--r-damage-varios-y); width: var(--r-damage-varios-w); height: var(--r-damage-varios-h); }
+.r-hero-whatsapp { position: absolute; left: var(--r-hero-whatsapp-x); top: var(--r-hero-whatsapp-y); width: var(--r-hero-whatsapp-w); height: var(--r-hero-whatsapp-h); }
+.r-services-strip { position: absolute; left: var(--r-services-strip-x); top: var(--r-services-strip-y); width: var(--r-services-strip-w); height: var(--r-services-strip-h); }
+.r-services-heading { position: absolute; left: var(--r-services-heading-x); top: var(--r-services-heading-y); width: var(--r-services-heading-w); height: var(--r-services-heading-h); }
+.r-service-repair { position: absolute; left: var(--r-service-repair-x); top: var(--r-service-repair-y); width: var(--r-service-repair-w); height: var(--r-service-repair-h); }
+.r-service-replacement { position: absolute; left: var(--r-service-replacement-x); top: var(--r-service-replacement-y); width: var(--r-service-replacement-w); height: var(--r-service-replacement-h); }
+.r-service-business { position: absolute; left: var(--r-service-business-x); top: var(--r-service-business-y); width: var(--r-service-business-w); height: var(--r-service-business-h); }
+.r-service-workshop { position: absolute; left: var(--r-service-workshop-x); top: var(--r-service-workshop-y); width: var(--r-service-workshop-w); height: var(--r-service-workshop-h); }

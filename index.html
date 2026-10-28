@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#101b24">
+  <title>Soimar Parabrisas — vista previa</title>
+  <link rel="stylesheet" href="assets/css/hero-layout.css">
+  <style>
+    @font-face { font-family: "Bakbak One"; src: url("assets/fonts/bakbak-one-regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Archivo"; src: url("assets/fonts/archivo-regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Archivo"; src: url("assets/fonts/archivo-semibold.ttf") format("truetype"); font-weight: 600; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Archivo"; src: url("assets/fonts/archivo-bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+    :root { --ink: #0b1720; --ink-soft: #263a48; --steel: #6f8999; --glass: #e7f7ff; --amber: #f8b829; --paper: #f6fafc; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: var(--paper); }
+    body { color: var(--ink); font-family: "Archivo", sans-serif; overflow-x: hidden; }
+    button, a { font: inherit; }
+    button { color: inherit; }
+    button:focus-visible, a:focus-visible { outline: 3px solid #0878ad; outline-offset: 4px; }
+    ::selection { color: #07131b; background: #ffd36b; }
+    .comp-frame { min-width: 100%; background: #daf0fa; isolation: isolate; }
+    .hero-plate { display: block; object-fit: fill; pointer-events: none; user-select: none; }
+    .r-windshield-view { z-index: 1; }
+    .r-windshield-frame { z-index: 2; }
+    .masthead { z-index: 5; display: flex; align-items: center; color: #f4f8fa; background: #1b272b; box-shadow: 0 10px 25px rgba(0, 0, 0, .28); }
+    .brand { z-index: 6; display: flex; align-items: center; gap: 1.15vw; color: #f3f8fa; text-decoration: none; white-space: nowrap; }
+    .brand strong { font-family: "Bakbak One", sans-serif; font-size: calc(52 * 100vw / 1586); line-height: 1; letter-spacing: .015em; }
+    .brand span { border-left: 2px solid var(--amber); padding-left: 1.15vw; font-size: calc(25 * 100vw / 1586); line-height: 1; }
+    .primary-nav { z-index: 6; display: flex; align-items: center; justify-content: space-between; gap: 1.7vw; }
+    .primary-nav a { color: #edf4f7; font-size: calc(18 * 100vw / 1586); font-weight: 700; letter-spacing: .03em; text-decoration: none; }
+    .primary-nav a:hover { color: #ffd166; }
+    .cta { display: inline-flex; align-items: center; justify-content: center; gap: 1vw; border: 0; background: var(--amber); color: #07131b; font-weight: 700; cursor: pointer; box-shadow: 0 8px 20px rgba(0, 0, 0, .16); }
+    .cta:hover { background: #ffc640; }
+    .cta svg { flex: 0 0 auto; width: calc(31 * 100vw / 1586); height: calc(31 * 100vw / 1586); }
+    .header-cta { z-index: 6; font-size: calc(18 * 100vw / 1586); border-radius: 9px; }
+    .header-cta .arrow { width: calc(22 * 100vw / 1586); height: calc(22 * 100vw / 1586); margin-left: .25vw; }
+    .masthead .brand { left: 5.55%; top: 15.76%; width: 23.01%; height: 61.07%; }
+    .masthead .primary-nav { left: 32.22%; top: 15.76%; width: 33.54%; height: 61.07%; }
+    .masthead .header-cta { left: 74%; top: 16.8%; width: 21.5%; height: 56.8%; }
+    .lead-headline, .lead-promise, .lead-copy, .lead-disclaimer, .diagnostic-progress, .damage-card, .hero-cta { z-index: 4; }
+    .lead-headline { margin: 0; display: flex; align-items: center; font-family: "Bakbak One", sans-serif; font-size: calc(119 * 100vw / 1586); font-weight: 400; line-height: .86; letter-spacing: -.025em; text-wrap: balance; transform: scaleX(1.06); transform-origin: left center; }
+    .lead-promise { margin: 0; display: flex; align-items: center; font-family: "Bakbak One", sans-serif; font-size: calc(49 * 100vw / 1586); line-height: 1; letter-spacing: -.025em; white-space: nowrap; }
+    .lead-copy { margin: 0; display: flex; align-items: flex-start; max-width: 62ch; font-size: calc(22 * 100vw / 1586); line-height: 1.34; letter-spacing: .005em; }
+    .lead-disclaimer { margin: 0; display: flex; align-items: center; font-size: calc(18 * 100vw / 1586); font-weight: 600; letter-spacing: .18em; text-transform: uppercase; white-space: nowrap; }
+    .diagnostic-progress { display: grid; grid-template-columns: repeat(3, 1fr); align-items: start; }
+    .progress-step { position: relative; text-align: center; color: var(--ink-soft); }
+    .progress-step:nth-child(1) { transform: translate(calc(-11 * 100vw / 1586), calc(8 * 100vw / 1586)); }
+    .progress-step:nth-child(2) { transform: translate(calc(11 * 100vw / 1586), calc(8 * 100vw / 1586)); }
+    .progress-step:nth-child(3) { transform: translate(calc(37 * 100vw / 1586), calc(8 * 100vw / 1586)); }
+    .progress-step::after { content: ""; position: absolute; z-index: -1; top: calc(20 * 100vw / 1586); left: 50%; width: 100%; border-top: 2px solid #7893a4; }
+    .progress-step:last-child::after { display: none; }
+    .step-dot { display: grid; place-items: center; width: calc(39 * 100vw / 1586); height: calc(39 * 100vw / 1586); margin: 0 auto calc(6 * 100vw / 1586); border: 2px solid #7893a4; border-radius: 50%; background: rgba(231, 247, 255, .88); font-size: calc(19 * 100vw / 1586); font-weight: 700; }
+    .progress-step.is-active .step-dot { border-color: var(--amber); background: var(--amber); }
+    .progress-step.is-active::after { border-color: var(--amber); }
+    .progress-step strong { display: block; font-size: calc(18 * 100vw / 1586); font-weight: 600; line-height: 1.14; }
+    .progress-step small { display: block; margin-top: .1vw; font-size: calc(14 * 100vw / 1586); line-height: 1.15; }
+    .damage-card { display: grid; grid-template-rows: 62% auto 1fr; align-items: end; padding: calc(8 * 100vw / 1586) calc(17 * 100vw / 1586); border: 1.5px solid #7994a5; border-radius: 5px; background: rgba(221, 241, 250, .36); text-align: left; cursor: pointer; }
+    .r-damage-piquete { left: 50.31%; }
+    .r-damage-trizadura { left: 65.07%; }
+    .r-damage-varios { left: 80.14%; }
+    .damage-card:hover { border-color: #294859; background: rgba(235, 248, 253, .62); }
+    .damage-card.is-selected { border: 3px solid var(--amber); padding: calc(6.5 * 100vw / 1586) calc(15.5 * 100vw / 1586); }
+    .damage-card::after { content: ""; position: absolute; top: calc(14 * 100vw / 1586); right: calc(14 * 100vw / 1586); width: calc(18 * 100vw / 1586); height: calc(18 * 100vw / 1586); border: 2px solid #7590a1; border-radius: 50%; }
+    .damage-card.is-selected::after { border: calc(5 * 100vw / 1586) solid #f4f9fb; background: var(--amber); box-shadow: 0 0 0 2px var(--amber); }
+    .damage-graphic { position: relative; align-self: center; justify-self: center; width: 70%; height: 70%; min-height: 0; }
+    .damage-graphic i { position: absolute; display: block; height: 2px; background: #17303e; transform-origin: left center; }
+    .chip .core, .multi .core { position: absolute; top: 48%; left: 50%; width: calc(13 * 100vw / 1586); height: calc(13 * 100vw / 1586); border: 2px solid #17303e; border-radius: 50%; transform: translate(-50%, -50%); }
+    .chip i, .multi i { top: 48%; left: 50%; width: 35%; }
+    .chip i:nth-child(2), .multi i:nth-child(2) { transform: rotate(0deg); }
+    .chip i:nth-child(3), .multi i:nth-child(3) { transform: rotate(42deg); }
+    .chip i:nth-child(4), .multi i:nth-child(4) { transform: rotate(88deg); }
+    .chip i:nth-child(5), .multi i:nth-child(5) { transform: rotate(137deg); }
+    .chip i:nth-child(6), .multi i:nth-child(6) { transform: rotate(184deg); }
+    .chip i:nth-child(7), .multi i:nth-child(7) { transform: rotate(229deg); }
+    .chip i:nth-child(8), .multi i:nth-child(8) { transform: rotate(278deg); }
+    .chip i:nth-child(9), .multi i:nth-child(9) { transform: rotate(323deg); }
+    .multi i { width: 52%; }
+    .multi { transform: translate(calc(8 * 100vw / 1586), calc(24 * 100vw / 1586)); }
+    .multi i { height: 1px; }
+    .multi .core { width: calc(17 * 100vw / 1586); height: calc(17 * 100vw / 1586); border: 3px solid #506b7a; background: #17303e; }
+    .multi .core::before { content: ""; position: absolute; inset: calc(-9 * 100vw / 1586); border: 1px solid rgba(23, 48, 62, .5); border-radius: 50%; }
+    .multi .core::after { content: ""; position: absolute; inset: calc(-17 * 100vw / 1586); border: 1px solid rgba(23, 48, 62, .28); border-radius: 50%; }
+    .multi i::after { content: ""; position: absolute; top: 0; left: 48%; width: 36%; height: 1px; background: rgba(23, 48, 62, .65); transform: rotate(34deg); transform-origin: left center; }
+    .multi i:nth-child(even)::after { transform: rotate(-38deg); }
+    .multi i:nth-child(3n)::before { content: ""; position: absolute; top: 0; left: 68%; width: 24%; height: 1px; background: rgba(23, 48, 62, .45); transform: rotate(-52deg); transform-origin: left center; }
+    .multi i:nth-child(10) { width: 42%; transform: rotate(20deg); }
+    .multi i:nth-child(11) { width: 44%; transform: rotate(69deg); }
+    .multi i:nth-child(12) { width: 39%; transform: rotate(159deg); }
+    .multi i:nth-child(13) { width: 47%; transform: rotate(252deg); }
+    .multi i:nth-child(14) { width: 37%; transform: rotate(310deg); opacity: .55; }
+    .multi i:nth-child(15) { width: 43%; transform: rotate(335deg); opacity: .5; }
+    .multi i:nth-child(16) { width: 32%; transform: rotate(108deg); opacity: .5; }
+    .multi i:nth-child(17) { width: 41%; transform: rotate(126deg); opacity: .55; }
+    .multi i:nth-child(18) { width: 35%; transform: rotate(146deg); opacity: .48; }
+    .multi i:nth-child(19) { width: 46%; transform: rotate(201deg); opacity: .52; }
+    .multi i:nth-child(20) { width: 34%; transform: rotate(221deg); opacity: .5; }
+    .multi i:nth-child(21) { width: 40%; transform: rotate(289deg); opacity: .5; }
+    .crack i { height: 2px; width: 29%; }
+    .crack i:nth-child(1) { top: 36%; left: 8%; transform: rotate(22deg); }
+    .crack i:nth-child(2) { top: 46%; left: 34%; transform: rotate(8deg); }
+    .crack i:nth-child(3) { top: 51%; left: 61%; transform: rotate(24deg); }
+    .crack i:nth-child(4) { top: 38%; left: 37%; width: 18%; transform: rotate(113deg); }
+    .crack i:nth-child(5) { top: 50%; left: 66%; width: 17%; transform: rotate(112deg); }
+    .r-damage-varios { grid-template-rows: 67% auto 1fr; }
+    .damage-card strong { font-size: calc(23 * 100vw / 1586); line-height: 1.08; }
+    .damage-card span { align-self: start; margin-top: calc(8 * 100vw / 1586); color: #2e4350; font-size: calc(17 * 100vw / 1586); line-height: 1.27; }
+    .hero-cta { justify-content: flex-start; padding: 0 0 0 calc(190 * 100vw / 1586); gap: calc(20 * 100vw / 1586); border-radius: 6px; font-size: calc(21 * 100vw / 1586); }
+    .hero-cta > span { white-space: nowrap; }
+    .hero-cta svg { width: calc(38 * 100vw / 1586); height: calc(38 * 100vw / 1586); }
+    .hero-cta .arrow { width: calc(24 * 100vw / 1586); height: calc(24 * 100vw / 1586); margin-left: 1vw; }
+    .services-strip { z-index: 7; background: #e9f7f8; }
+    .services-strip::before { content: ""; position: absolute; top: calc(24 * 100vw / 1586); left: 3.5%; right: 3.5%; border-top: 1px solid #758895; }
+    .services-heading { z-index: 8; display: flex; align-items: center; gap: 1vw; color: #263844; font-size: calc(12 * 100vw / 1586); font-weight: 600; letter-spacing: .26em; text-transform: uppercase; }
+    .services-heading .heading-rule { flex: 1; border-top: 1px solid #758895; }
+    .service-index { z-index: 8; display: grid; grid-template-columns: auto 1fr auto; grid-template-rows: auto auto 1fr; column-gap: .8vw; align-content: start; padding: calc(14 * 100vw / 1586) 1.3vw .2vw .65vw; color: var(--ink); text-decoration: none; border-right: 1px solid #8b9ca6; }
+    .service-index:last-child { border-right: 0; }
+    .service-index .number { grid-column: 1; align-self: center; font-size: calc(11 * 100vw / 1586); font-weight: 700; }
+    .service-index .rule { grid-column: 2; align-self: center; width: 62%; border-top: 1px solid #546875; }
+    .service-index h2 { grid-column: 1 / 3; grid-row: 2; margin: .55vw 0 .25vw; color: #0a0c0f; font-size: calc(30 * 100vw / 1586); font-weight: 400; line-height: 1; letter-spacing: -.02em; }
+    .service-index p { grid-column: 1 / 3; grid-row: 3; align-self: start; max-width: 20ch; margin: 0; color: #51565f; font-size: calc(16.5 * 100vw / 1586); line-height: 1.35; }
+    .r-service-repair p { max-width: 28ch; }
+    .r-service-replacement p { max-width: 23ch; }
+    .r-service-business p { max-width: 18ch; }
+    .r-service-workshop p { max-width: 26ch; }
+    .service-index svg { grid-column: 3; grid-row: 2 / 4; align-self: end; margin-bottom: calc(12 * 100vw / 1586); width: calc(23 * 100vw / 1586); height: calc(23 * 100vw / 1586); }
+    .service-index:hover h2 { text-decoration: underline; text-underline-offset: .18em; }
+    @media (max-width: 900px) { .comp-frame { min-width: 980px; transform-origin: top left; } }
+  </style>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body id="top">
+  <header class="sticky-bar" id="scrollHeader" aria-label="Navegación al desplazarse">
+    <a class="sticky-brand" href="#top">SOIMAR</a>
+    <nav class="sticky-nav" aria-label="Navegación secundaria">
+      <a href="#diagnostico">Diagnóstico</a><a href="#servicios-detalle">Servicios</a><a href="#empresas-detalle">Empresas</a><a href="#taller-detalle">Taller</a>
+    </nav>
+    <button class="sticky-contact" type="button" data-contact>Enviar foto</button>
+  </header>
+  <main>
+    <section class="comp-frame" aria-labelledby="hero-title">
+      <img class="hero-plate r-windshield-view" src="assets/plates/windshield-view.png" alt="">
+      <img class="hero-plate r-windshield-frame" src="assets/plates/windshield-frame.png" alt="">
+      <header class="masthead r-masthead" aria-label="Encabezado principal">
+      <a class="brand r-brand" href="#top" aria-label="Soimar Parabrisas, inicio"><strong>SOIMAR</strong><span>Parabrisas</span></a>
+      <nav class="primary-nav r-primary-nav" aria-label="Navegación principal"><a href="#reparacion">Reparación</a><a href="#servicios">Servicios</a><a href="#empresas">Empresas</a><a href="#taller">Taller</a></nav>
+        <button class="cta header-cta r-header-whatsapp" type="button" aria-label="Enviar una foto por WhatsApp" data-contact>
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M27.2 15.7a11 11 0 0 1-16.3 9.7l-6.1 1.7 1.7-5.9A11 11 0 1 1 27.2 15.7Z" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M11.2 10.2c.3-.7.6-.7 1.1-.7h.5c.2 0 .5.1.6.5l1.2 2.9c.1.4 0 .7-.2.9l-.9 1c-.2.2-.2.5 0 .8 1.1 2.2 2.8 3.8 5 4.8.3.1.6.1.8-.2l1.2-1.5c.2-.3.5-.4.8-.2l2.8 1.3c.4.2.5.4.5.7 0 .7-.3 2.2-1.4 2.8-1 .6-2.3.8-3.7.3-2.1-.6-4.8-1.9-7.4-4.4-2.1-2.1-3.6-4.6-4-6.5-.4-1.7.1-2.7.6-3.3.5-.5 1.1-.8 1.5-.8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <span>Enviar foto por WhatsApp</span><svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      </header>
+      <h1 class="lead-headline r-lead-headline" id="hero-title">¿Piquete o<br>trizadura?</h1>
+      <p class="lead-promise r-lead-promise">Revísalo antes de que avance.</p>
+      <p class="lead-copy r-lead-copy">Identifica el tipo de daño en tu parabrisas con nuestra guía visual y recibe orientación de un especialista.</p>
+      <p class="lead-disclaimer r-lead-disclaimer">Guía visual · no reemplaza evaluación en taller</p>
+      <div class="diagnostic-progress r-diagnostic-progress" aria-label="Progreso del diagnóstico, paso 1 de 3">
+        <div class="progress-step is-active"><span class="step-dot">1</span><strong>Tipo de daño</strong><small>¿Qué observas?</small></div>
+        <div class="progress-step"><span class="step-dot">2</span><strong>Zona del parabrisas</strong><small>¿Dónde está?</small></div>
+        <div class="progress-step"><span class="step-dot">3</span><strong>Resultado orientativo</strong><small>Revisa la recomendación</small></div>
+      </div>
+      <span class="inspection-marker" id="inspectionMarker" aria-hidden="true" hidden></span>
+      <span class="sr-only" id="heroAssessmentStatus" aria-live="polite"></span>
+      <button class="damage-card is-selected r-damage-piquete" type="button" aria-pressed="true" data-damage-type="piquete"><span class="damage-graphic chip" aria-hidden="true"><span class="core"></span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><strong>Piquete</strong><span>Pequeño impacto en forma de punto.</span></button>
+      <button class="damage-card r-damage-trizadura" type="button" aria-pressed="false" data-damage-type="trizadura"><span class="damage-graphic crack" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><strong>Trizadura</strong><span>Grieta lineal en el vidrio.</span></button>
+      <button class="damage-card r-damage-varios" type="button" aria-pressed="false" data-damage-type="varios"><span class="damage-graphic multi" aria-hidden="true"><span class="core"></span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><strong>Varios daños</strong><span>Daño extenso<br>con varias líneas.</span></button>
+      <button class="cta hero-cta r-hero-whatsapp" type="button" data-contact>
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M27.2 15.7a11 11 0 0 1-16.3 9.7l-6.1 1.7 1.7-5.9A11 11 0 1 1 27.2 15.7Z" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M11.2 10.2c.3-.7.6-.7 1.1-.7h.5c.2 0 .5.1.6.5l1.2 2.9c.1.4 0 .7-.2.9l-.9 1c-.2.2-.2.5 0 .8 1.1 2.2 2.8 3.8 5 4.8.3.1.6.1.8-.2l1.2-1.5c.2-.3.5-.4.8-.2l2.8 1.3c.4.2.5.4.5.7 0 .7-.3 2.2-1.4 2.8-1 .6-2.3.8-3.7.3-2.1-.6-4.8-1.9-7.4-4.4-2.1-2.1-3.6-4.6-4-6.5-.4-1.7.1-2.7.6-3.3.5-.5 1.1-.8 1.5-.8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <span>Enviar foto por WhatsApp</span><svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="services-strip r-services-strip" aria-hidden="true"></div>
+      <div class="services-heading r-services-heading"><span>Nuestros servicios</span><span class="heading-rule"></span><span>Soluciones en vidrios automotrices</span></div>
+      <a class="service-index r-service-repair" id="reparacion" href="#reparacion-detalle"><span class="number">01</span><span class="rule"></span><h2>Reparación</h2><p>Piquetes y trizaduras. Recupera la seguridad de tu parabrisas.</p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+      <a class="service-index r-service-replacement" id="servicios" href="#servicios-detalle"><span class="number">02</span><span class="rule"></span><h2>Servicios</h2><p>Cambio de parabrisas y vidrios automotrices.</p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+      <a class="service-index r-service-business" id="empresas" href="#empresas-detalle"><span class="number">03</span><span class="rule"></span><h2>Empresas</h2><p>Soluciones para flotas y empresas.</p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+      <a class="service-index r-service-workshop" id="taller" href="#taller-detalle"><span class="number">04</span><span class="rule"></span><h2>Taller</h2><p>Tecnología y especialistas en vidrios automotrices.</p><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    </section>
+
+    <section class="mobile-hero" aria-labelledby="mobile-title">
+      <header class="mobile-head">
+        <a class="sticky-brand" href="#top">SOIMAR</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu">Menú</button>
+      </header>
+      <nav class="mobile-menu" id="mobileMenu" aria-label="Navegación móvil">
+        <a href="#diagnostico">Diagnóstico</a><a href="#servicios-detalle">Servicios</a><a href="#empresas-detalle">Empresas</a><a href="#taller-detalle">Taller</a><button type="button" data-contact>Enviar foto</button>
+      </nav>
+      <h1 class="mobile-title" id="mobile-title">¿Piquete o trizadura?</h1>
+      <p class="mobile-promise">Revísalo antes de que avance.</p>
+      <p class="mobile-copy">Usa la guía visual para identificar el daño y preparar la información que necesita un especialista.</p>
+      <div class="mobile-damage" aria-label="Elige el tipo de daño">
+        <button type="button" aria-pressed="true" data-damage-type="piquete">Piquete · impacto pequeño</button>
+        <button type="button" aria-pressed="false" data-damage-type="trizadura">Trizadura · línea en el vidrio</button>
+        <button type="button" aria-pressed="false" data-damage-type="varios">Varios daños · múltiples líneas</button>
+      </div>
+      <a class="action action--signal" href="#diagnostico">Continuar diagnóstico</a>
+    </section>
+
+    <section class="page-section diagnostic-section frit-line" id="diagnostico" aria-labelledby="diagnostic-title">
+      <div class="section-shell diagnostic-layout">
+        <div class="diagnostic-copy">
+          <h2 class="section-title" id="diagnostic-title">Una guía clara antes de ir al taller.</h2>
+          <p class="section-lead">Selecciona el daño, su ubicación y tamaño. El resultado es orientativo: una foto o revisión presencial sigue siendo necesaria.</p>
+          <p class="diagnostic-note">La tabla de decisión está pendiente de validación final con Soimar. La regla confirmada para esta vista previa es: un piquete mayor que una moneda y cerca del borde orienta a cambio.</p>
+        </div>
+        <div class="diagnostic-console">
+          <div class="console-head"><strong>Diagnóstico visual</strong><span class="console-status" id="diagProgress">Paso 1 de 3</span></div>
+          <fieldset class="diag-step">
+            <legend>¿Qué observas?</legend>
+            <div class="choice-row" id="diagTypes">
+              <button class="choice" type="button" data-diag-type="piquete" aria-pressed="true">Piquete</button>
+              <button class="choice" type="button" data-diag-type="trizadura" aria-pressed="false">Trizadura</button>
+              <button class="choice" type="button" data-diag-type="varios" aria-pressed="false">Varios daños</button>
+            </div>
+          </fieldset>
+          <fieldset class="diag-step">
+            <legend>¿Dónde está el daño?</legend>
+            <div class="windshield-map" aria-label="Selecciona una zona del parabrisas">
+              <div class="driver-zone" aria-hidden="true"><span>Zona de visión</span></div>
+              <button class="zone-choice" type="button" data-zone="vision" aria-pressed="false">Frente al conductor</button>
+              <button class="zone-choice" type="button" data-zone="centro" aria-pressed="false">Centro</button>
+              <button class="zone-choice" type="button" data-zone="borde" aria-pressed="false">Cerca del borde</button>
+            </div>
+          </fieldset>
+          <fieldset class="diag-step" id="sizeStep" disabled>
+            <legend>¿Qué tamaño tiene?</legend>
+            <div class="choice-row" id="sizeChoices"><span class="console-status">Selecciona primero una zona.</span></div>
+          </fieldset>
+          <article class="diag-result" id="diagResult" hidden aria-live="polite">
+            <span class="result-badge" id="resultBadge"></span>
+            <h3 id="resultTitle"></h3>
+            <p id="resultText"></p>
+            <div class="result-actions"><button class="action action--signal" type="button" data-contact>Preparar consulta por WhatsApp</button><button class="action" type="button" id="resetDiag">Empezar de nuevo</button></div>
+            <p class="validation-flag">Orientación visual. No reemplaza la evaluación de un especialista.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section compare-section" id="reparacion-detalle" aria-labelledby="compare-title">
+      <div class="section-shell">
+        <h2 class="section-title" id="compare-title">El valor está en detener el avance.</h2>
+        <p class="section-lead">Mueve el control para entender qué cambia después de una reparación. La demostración explica el principio; no corresponde a un trabajo real de Soimar.</p>
+        <div class="compare-grid">
+          <div>
+            <div class="compare-tabs" role="tablist" aria-label="Tipos de comparación">
+              <button class="compare-tab" type="button" role="tab" id="tab-impacto" aria-selected="true" aria-controls="comparePanel" tabindex="0" data-compare-case="impacto">Piquete</button>
+              <button class="compare-tab" type="button" role="tab" id="tab-linea" aria-selected="false" aria-controls="comparePanel" tabindex="-1" data-compare-case="linea">Trizadura corta</button>
+            </div>
+            <div class="compare-frame" id="comparePanel" role="tabpanel" aria-labelledby="tab-impacto">
+              <div class="compare-before"><div class="compare-scene"><span class="compare-impact" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></div></div>
+              <div class="compare-after" id="compareAfter"><div class="compare-scene"><span class="compare-impact" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></div></div>
+              <span class="compare-label compare-label--before">Antes</span><span class="compare-label compare-label--after">Después</span>
+              <label class="sr-only" for="compareRange">Porcentaje visible del resultado después</label>
+              <input class="compare-range" id="compareRange" type="range" min="0" max="100" value="58">
+            </div>
+          </div>
+          <div class="compare-copy">
+            <h3 id="compareCaseTitle">Piquete estabilizado</h3>
+            <p id="compareCaseText">La resina ocupa la cavidad y ayuda a detener la propagación. Puede quedar una marca leve: la prioridad es recuperar estabilidad y evitar que el daño avance.</p>
+            <p class="illustrative-note">Representación ilustrativa. No es fotografía ni evidencia de un trabajo realizado por Soimar.</p>
+            <button class="action action--signal" type="button" data-contact>Consultar con una foto</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section services-section" id="servicios-detalle" aria-labelledby="services-title">
+      <div class="section-shell">
+        <h2 class="section-title" id="services-title">Vidrio automotriz, explicado sin rodeos.</h2>
+        <p class="section-lead">La decisión correcta depende del daño, la posición y el equipamiento del vehículo. Primero se evalúa; después se define el trabajo.</p>
+        <div class="service-ledger">
+          <article class="service-row"><h3>Reparación</h3><p>Piquetes y trizaduras pequeñas pueden ser reparables cuando están lejos del borde y no comprometen la visión. La evaluación confirma si conviene intervenir.</p><span class="service-mark" aria-hidden="true">R</span></article>
+          <article class="service-row"><h3>Cambio</h3><p>Cuando el daño es extenso o está en una zona crítica, se revisa el parabrisas adecuado para el modelo y versión antes de cotizar.</p><span class="service-mark" aria-hidden="true">C</span></article>
+          <article class="service-row"><h3>Vidrios laterales y luneta</h3><p>La rotura de vidrios laterales o traseros suele requerir reemplazo. Disponibilidad, compatibilidad y alcance se confirman caso a caso.</p><span class="service-mark" aria-hidden="true">V</span></article>
+          <article class="service-row"><h3>Cámaras y sensores</h3><p>Si el vehículo integra asistencia a la conducción, la consulta debe identificar su equipamiento para orientar los pasos de calibración posteriores.</p><span class="service-mark" aria-hidden="true">A</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section gallery-section" id="trabajos" aria-labelledby="gallery-title">
+      <div class="section-shell">
+        <h2 class="section-title" id="gallery-title">Explora el tipo de intervención.</h2>
+        <p class="section-lead">Todavía no hay fotografías verificadas para publicar. Estas vistas son diagramas explicativos y se reemplazarán por trabajos reales cuando Soimar los entregue.</p>
+        <div class="gallery-stage">
+          <div class="gallery-selectors" role="tablist" aria-label="Tipos de trabajo">
+            <button class="gallery-option" id="gallery-tab-impacto" type="button" role="tab" aria-selected="true" aria-controls="galleryPanel" tabindex="0" data-gallery="impacto"><strong>Piquete</strong><span>Daño localizado</span></button>
+            <button class="gallery-option" id="gallery-tab-linea" type="button" role="tab" aria-selected="false" aria-controls="galleryPanel" tabindex="-1" data-gallery="linea"><strong>Trizadura</strong><span>Grieta lineal</span></button>
+            <button class="gallery-option" id="gallery-tab-cambio" type="button" role="tab" aria-selected="false" aria-controls="galleryPanel" tabindex="-1" data-gallery="cambio"><strong>Cambio</strong><span>Reemplazo completo</span></button>
+          </div>
+          <div class="gallery-visual" id="galleryPanel" role="tabpanel" aria-labelledby="gallery-tab-impacto" aria-live="polite">
+            <div class="gallery-art"><span class="gallery-damage" id="galleryDamage" aria-hidden="true"></span></div>
+            <div class="gallery-caption"><strong id="galleryCaption">Diagrama de un piquete localizado</strong><span>Representación ilustrativa · no es un trabajo real</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section process-section" aria-labelledby="process-title">
+      <div class="section-shell">
+        <h2 class="section-title" id="process-title">De la foto a una decisión clara.</h2>
+        <div class="process-line" id="processLine">
+          <article class="process-step" data-step="1"><h3>Envía el contexto</h3><p>Tipo de daño, ubicación, tamaño y una foto nítida.</p></article>
+          <article class="process-step" data-step="2"><h3>Revisión inicial</h3><p>Se orienta si parece reparable o si requiere cambio.</p></article>
+          <article class="process-step" data-step="3"><h3>Confirma alcance</h3><p>Compatibilidad, disponibilidad y datos comerciales antes de agendar.</p></article>
+          <article class="process-step" data-step="4"><h3>Visita el taller</h3><p>La evaluación presencial confirma la solución definitiva.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section technical-section" id="revision" aria-labelledby="technical-title">
+      <div class="section-shell technical-grid">
+        <div><h2 class="section-title" id="technical-title">¿Te observaron el parabrisas en la revisión técnica?</h2><p class="section-lead">Trae el informe de la planta. Una trizadura que dificulta la visión puede requerir intervención; la evaluación define si corresponde reparar o cambiar.</p></div>
+        <aside class="technical-panel"><h3>Antes de volver a la planta</h3><p>Comparte una foto y la observación recibida. Soimar podrá confirmar el alcance una vez habilitados sus canales comerciales definitivos.</p><button class="action action--signal" type="button" data-contact>Preparar consulta</button></aside>
+      </div>
+    </section>
+
+    <section class="page-section business-section" id="empresas-detalle" aria-labelledby="business-title">
+      <div class="section-shell">
+        <h2 class="section-title" id="business-title">Una consulta ordenada para cada flota.</h2>
+        <p class="section-lead">Reúne los datos de los vehículos y del daño en una sola solicitud. La modalidad comercial se confirma directamente con Soimar.</p>
+        <div class="business-grid">
+          <ul class="business-points">
+            <li><strong>Contexto por unidad</strong><span>Patente, modelo, versión y tipo de daño para evitar idas y vueltas al cotizar.</span></li>
+            <li><strong>Prioridad visible</strong><span>Indica qué vehículos están detenidos o requieren revisión antes que el resto.</span></li>
+            <li><strong>Alcance confirmado</strong><span>La disponibilidad, plazos y condiciones se informan antes de coordinar el trabajo.</span></li>
+          </ul>
+          <form class="business-form" id="businessForm" novalidate>
+            <h3>Preparar solicitud empresarial</h3>
+            <div class="field"><label for="companyName">Empresa</label><input id="companyName" name="empresa" autocomplete="organization" required></div>
+            <div class="field"><label for="contactName">Nombre de contacto</label><input id="contactName" name="contacto" autocomplete="name" required></div>
+            <div class="field"><label for="contactEmail">Correo</label><input id="contactEmail" name="correo" type="email" autocomplete="email" required></div>
+            <div class="field"><label for="fleetSize">Vehículos en la flota</label><select id="fleetSize" name="flota"><option>1 a 5</option><option>6 a 20</option><option>21 a 50</option><option>Más de 50</option></select></div>
+            <div class="field"><label for="companyMessage">Qué necesitas cotizar</label><textarea id="companyMessage" name="mensaje" required></textarea></div>
+            <button class="action action--signal" type="submit">Revisar solicitud</button>
+            <p class="form-status" id="formStatus" role="alert" hidden></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section trust-section" aria-labelledby="trust-title">
+      <div class="section-shell trust-grid">
+        <div class="rating-block"><span class="rating-number">5,0</span><div class="rating-meta"><strong>Google</strong><span>2 reseñas</span><span>Verificado 2026-10</span></div></div>
+        <div class="trust-copy"><h2 class="section-title" id="trust-title">La señal disponible es positiva; la muestra todavía es pequeña.</h2><p>No publicamos testimonios inventados ni elevamos esta cifra al hero. Cuando exista un volumen representativo y contenido verificable, esta sección podrá incorporar reseñas reales.</p></div>
+      </div>
+    </section>
+
+    <section class="page-section faq-section" id="preguntas" aria-labelledby="faq-title">
+      <div class="section-shell">
+        <h2 class="section-title" id="faq-title">Preguntas antes de tomar una decisión.</h2>
+        <div class="faq-list">
+          <details><summary>¿Cuándo se puede reparar y cuándo hay que cambiar?</summary><p>Depende del tamaño, la profundidad y la ubicación. Los daños pequeños, lejos del borde y fuera de la visión del conductor suelen ser mejores candidatos a reparación. Una foto orienta; el taller confirma.</p></details>
+          <details><summary>¿La reparación queda invisible?</summary><p>Puede mejorar mucho la apariencia y ayudar a detener el avance, pero puede quedar una marca leve. Por eso la posición del daño importa tanto como su tamaño.</p></details>
+          <details><summary>¿Qué foto sirve para evaluar?</summary><p>Una toma general del parabrisas y otra cercana, con buena luz y sin reflejos fuertes. Incluye una referencia de tamaño y especifica si el daño está cerca del borde.</p></details>
+          <details><summary>¿Cuánto demora el trabajo?</summary><p>El tiempo depende de la intervención, el vehículo y la disponibilidad del vidrio. La duración se confirma al cotizar; esta vista previa no publica plazos no validados.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section workshop-section" id="taller-detalle" aria-labelledby="workshop-title">
+      <div class="section-shell">
+        <div class="workshop-grid">
+          <div class="map-shell" id="mapShell" aria-label="Mapa de contexto de Valparaíso; ubicación exacta pendiente">
+            <div class="map-viewport" id="mapViewport"><div class="map-water"></div><div class="map-hill"></div><span class="map-road map-road--a"></span><span class="map-road map-road--b"></span><span class="map-road map-road--c"></span><span class="map-road map-road--d"></span><span class="map-pin" aria-hidden="true"><span>?</span></span></div>
+            <div class="map-controls"><button type="button" id="mapZoomIn" aria-label="Acercar mapa">+</button><button type="button" id="mapZoomOut" aria-label="Alejar mapa">−</button></div>
+            <p class="map-note">Contexto de Valparaíso. El marcador no representa una dirección confirmada.</p>
+            <small class="map-attribution">Integración pendiente · <a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a> · © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a></small>
+          </div>
+          <div class="workshop-info"><div><h2 id="workshop-title">El taller, sin datos inventados.</h2><p>La web está preparada para mostrar dirección, horarios, teléfono y coordenadas apenas Soimar los confirme.</p><p class="pending-data">Dirección exacta, coordenadas, horario y teléfono: pendientes de confirmación.</p></div><button class="action action--light" type="button" data-contact>Consultar cómo llegar</button></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div><div class="footer-brand">SOIMAR</div><p>Parabrisas y vidrios automotrices en Valparaíso.</p></div>
+      <div><h2>Explorar</h2><ul><li><a href="#diagnostico">Diagnóstico visual</a></li><li><a href="#servicios-detalle">Servicios</a></li><li><a href="#empresas-detalle">Empresas</a></li></ul></div>
+      <div><h2>Información</h2><ul><li><a href="#preguntas">Preguntas frecuentes</a></li><li><a href="#taller-detalle">Taller</a></li><li>Datos comerciales pendientes</li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>Vista previa local · noindex</span><span>Sin precios, fotografías ni testimonios no verificados.</span></div>
+  </footer>
+  <div class="toast" id="contactToast" role="status" hidden>El número de WhatsApp todavía no está confirmado. La acción quedará habilitada al incorporar el dato oficial de Soimar.</div>
+  <script src="app.js" defer></script>
+</body>
+</html>
