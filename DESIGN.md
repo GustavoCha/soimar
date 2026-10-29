@@ -302,7 +302,7 @@ La cabecera sticky usa carbón, texto blanco vidrio y una regla inferior. Mide 7
 
 ### Editorial Hero
 
-Una fotografía de Valparaíso vista a través del parabrisas ocupa el campo completo, con una veladura clara direccional que protege el contraste. El copy editorial queda separado del diagnóstico; no se rasteriza texto ni se incorpora la composición al asset fotográfico.
+La fotografía de Valparaíso se monta dentro de un marco transparente de parabrisas realista que conserva pilares, tablero y volante. Una veladura clara direccional protege el contraste sin borrar la ciudad. El copy editorial queda separado del diagnóstico; no se rasteriza texto ni se incorpora la composición al asset fotográfico. En layouts apilados se retira el marco para evitar deformación, pero se conserva la vista de Valparaíso.
 
 ### Damage Selector
 
