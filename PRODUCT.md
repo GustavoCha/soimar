@@ -29,16 +29,19 @@ Most visitors arrive with a damaged vehicle, often on a phone, and need an answe
 
 ## Capabilities and Constraints
 
-- Preserve the interactive damage orientation, before/after comparison, service presentation, explorable work gallery, process, company enquiry, reviews, FAQ, and workshop location.
+- Preserve the interactive damage orientation, scroll-driven repair story, service presentation, public work gallery, process, company enquiry, reviews, FAQ, and workshop location.
 - Preserve the approved diagnostic rules. In particular, a chip larger than a coin and close to the edge returns `replace`.
 - The diagnostic result is guidance only. The diagnostic decision table remains pending validation with Soimar.
 - Google rating is 5.0 from 2 reviews, verified 2026-10. Do not display it in the hero while there are fewer than 10 reviews.
-- OpenFreeMap must retain visible OpenFreeMap and OpenStreetMap attribution.
+- The repair story uses generated demonstration imagery with one stable frame across before, intervention, and after. It must remain clearly separated from real Soimar work.
+- The public gallery publishes only verified, authorized photographs. Until those exist, show an honest empty state rather than synthetic work.
 - No form may simulate a real submission.
-- Preview artifacts use `noindex` and must not be deployed to production before Phase 6 is complete and validated.
-- Preserve Tailwind Preflight compatibility, base adjustments through `@layer base` when Tailwind is present, 68px scroll padding, minimum 4.5:1 text contrast, a comparator inside a `tabpanel`, and gallery hover only on compatible devices from 761px.
+- Preview artifacts use noindex and must not be deployed to production until the user explicitly authorizes it.
+- Preserve Tailwind Preflight compatibility, base adjustments through the base CSS layer when Tailwind is present, header-aware scroll padding, minimum 4.5:1 text contrast, keyboard-operable controls, and a complete static fallback for reduced motion.
 - Do not add the mockup information bar to the final application.
-- Domain, coordinates, telephone, opening hours, prices, and other unconfirmed commercial data remain visibly marked as pending or must be omitted from customer-facing claims.
+- Address confirmed: Av. Francia 965, Valparaíso, Chile. Google Maps, Waze, and Apple Maps may resolve this address as text without requesting geolocation.
+- Domain, exact coordinates, Google Place ID, telephone, opening hours, prices, and other unconfirmed commercial data belong in implementation documentation or must be omitted from customer-facing claims.
+- Until the official telephone number is supplied, WhatsApp controls prepare/copy a message and must name that behavior instead of promising an actual send.
 
 ## Brand Commitments
 
@@ -51,7 +54,7 @@ Most visitors arrive with a damaged vehicle, often on a phone, and need an answe
 - Functional reference mockup: `C:\Users\g.chamorro.soto\Downloads\soimar-mockup 1.html`.
 - Confirmed rating evidence: Google 5.0 with 2 reviews, verified 2026-10.
 - The mockup contains illustrative SVG scenes and vehicle graphics, not verified photographs of Soimar work.
-- No verified customer quotations, prices, certifications, production domain, telephone number, exact coordinates, or authentic job photography were supplied. Future work must not fabricate them.
+- No verified customer quotations, prices, certifications, production domain, telephone number, exact coordinates, Google Place ID, or authentic job photography were supplied. Future work must not fabricate them.
 
 ## Product Principles
 

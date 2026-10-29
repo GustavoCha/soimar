@@ -1,44 +1,69 @@
 (() => {
   "use strict";
 
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const selectAll = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const mobileLayout = window.matchMedia("(max-width: 720px)");
 
-  const toast = document.getElementById("contactToast");
+  const toast = $("#toast");
   let toastTimer;
-  const showContactPending = () => {
+  const showToast = (message) => {
     clearTimeout(toastTimer);
+    toast.textContent = message;
     toast.hidden = false;
-    toastTimer = window.setTimeout(() => { toast.hidden = true; }, 6500);
+    toastTimer = window.setTimeout(() => {
+      toast.hidden = true;
+    }, 5200);
   };
-  selectAll("[data-contact]").forEach((button) => button.addEventListener("click", showContactPending));
 
-  const desktopHero = document.querySelector(".comp-frame");
-  const scrollHeader = document.getElementById("scrollHeader");
-  const updateStickyHeader = () => {
-    const mobile = window.matchMedia("(max-width: 900px)").matches;
-    const heroPassed = desktopHero && desktopHero.getBoundingClientRect().bottom <= 10;
-    scrollHeader.classList.toggle("is-visible", !mobile && heroPassed);
+  const copyText = async (value) => {
+    try {
+      await navigator.clipboard.writeText(value);
+      return true;
+    } catch {
+      const field = document.createElement("textarea");
+      field.value = value;
+      field.setAttribute("readonly", "");
+      field.style.position = "fixed";
+      field.style.opacity = "0";
+      document.body.append(field);
+      field.select();
+      const copied = document.execCommand("copy");
+      field.remove();
+      return copied;
+    }
   };
-  document.addEventListener("scroll", updateStickyHeader, { passive: true });
-  window.addEventListener("resize", updateStickyHeader);
-  updateStickyHeader();
 
-  const menuToggle = document.querySelector(".menu-toggle");
-  const mobileMenu = document.getElementById("mobileMenu");
+  $$("[data-contact]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const message = button.dataset.message || "Hola Soimar, quisiera consultar por mi parabrisas.";
+      const copied = await copyText(message);
+      showToast(copied
+        ? "Mensaje preparado y copiado. El número oficial de WhatsApp aún debe confirmarse."
+        : "Mensaje preparado. El número oficial de WhatsApp aún debe confirmarse.");
+    });
+  });
+
+  const menuToggle = $("#menuToggle");
+  const primaryNav = $("#primaryNav");
   const closeMenu = () => {
-    mobileMenu.classList.remove("is-open");
     menuToggle.setAttribute("aria-expanded", "false");
+    primaryNav.classList.remove("is-open");
   };
   menuToggle.addEventListener("click", () => {
     const open = menuToggle.getAttribute("aria-expanded") !== "true";
     menuToggle.setAttribute("aria-expanded", String(open));
-    mobileMenu.classList.toggle("is-open", open);
+    primaryNav.classList.toggle("is-open", open);
   });
-  selectAll("a", mobileMenu).forEach((link) => link.addEventListener("click", closeMenu));
-  document.addEventListener("keydown", (event) => { if (event.key === "Escape") closeMenu(); });
+  $$("a", primaryNav).forEach((link) => link.addEventListener("click", closeMenu));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeMenu();
+  });
 
-  const state = { type: "piquete", zone: null, size: null };
+  const diagnosis = { type: "piquete", zone: null, size: null };
+  const typeLabels = { piquete: "piquete", trizadura: "trizadura", varios: "varios daños" };
+  const zoneLabels = { vision: "frente al conductor", centro: "centro", borde: "cerca del borde" };
   const sizeOptions = {
     piquete: [
       ["s", "Más chico que una moneda de $100"],
@@ -73,23 +98,6 @@
     }
   };
 
-  const diagTypeButtons = selectAll("[data-diag-type]");
-  const damageTypeButtons = selectAll("[data-damage-type]");
-  const zoneButtons = selectAll("[data-zone]", document.getElementById("diagnostico"));
-  const sizeStep = document.getElementById("sizeStep");
-  const sizeChoices = document.getElementById("sizeChoices");
-  const diagResult = document.getElementById("diagResult");
-  const diagProgress = document.getElementById("diagProgress");
-  const heroProgress = document.querySelector(".diagnostic-progress");
-  const inspectionMarker = document.getElementById("inspectionMarker");
-  const heroAssessmentStatus = document.getElementById("heroAssessmentStatus");
-  let inspectionAnimation;
-  let inspectionRun = 0;
-
-  const setPressed = (buttons, attr, value) => buttons.forEach((button) => {
-    button.setAttribute("aria-pressed", String(button.dataset[attr] === value));
-  });
-
   const getVerdict = ({ type, zone, size }) => {
     if (zone === "borde") {
       if (type === "piquete" && size === "l") return "replace";
@@ -103,31 +111,50 @@
     return size === "s" ? "eval" : "replace";
   };
 
+  const diagTypeButtons = $$("[data-diag-type]");
+  const heroTypeButtons = $$("[data-damage-type]");
+  const zoneButtons = $$("[data-zone]", $("#diagnostico"));
+  const sizeStep = $("#sizeStep");
+  const sizeChoices = $("#sizeChoices");
+  const diagResult = $("#diagResult");
+  const diagProgress = $("#diagProgress");
+  const resultContact = $("#resultContact");
+
+  const setPressed = (buttons, dataName, value) => {
+    buttons.forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset[dataName] === value));
+    });
+  };
+
   const updateProgress = () => {
-    const step = !state.zone ? 2 : !state.size ? 3 : 3;
-    diagProgress.textContent = state.size ? "Resultado listo" : `Paso ${step} de 3`;
+    if (diagnosis.size) diagProgress.textContent = "Resultado listo";
+    else if (diagnosis.zone) diagProgress.textContent = "Paso 3 de 3";
+    else if (diagnosis.type) diagProgress.textContent = "Paso 2 de 3";
+    else diagProgress.textContent = "Paso 1 de 3";
   };
 
   const renderResult = () => {
     updateProgress();
-    if (!(state.type && state.zone && state.size)) {
+    if (!(diagnosis.type && diagnosis.zone && diagnosis.size)) {
       diagResult.hidden = true;
       return;
     }
-    const verdict = getVerdict(state);
+    const verdict = getVerdict(diagnosis);
     const copy = verdictCopy[verdict];
     diagResult.dataset.verdict = verdict;
-    document.getElementById("resultBadge").textContent = copy.badge;
-    document.getElementById("resultTitle").textContent = copy.title;
-    document.getElementById("resultText").textContent = copy.text;
+    $("#resultBadge").textContent = copy.badge;
+    $("#resultTitle").textContent = copy.title;
+    $("#resultText").textContent = copy.text;
+    const selectedSize = sizeOptions[diagnosis.type].find(([value]) => value === diagnosis.size)?.[1] || diagnosis.size;
+    resultContact.dataset.message = `Hola Soimar, hice la guía visual. Seleccioné ${typeLabels[diagnosis.type]}, ubicado ${zoneLabels[diagnosis.zone]}, tamaño ${selectedSize.toLowerCase()}. El resultado orientativo fue: ${copy.title}. Quisiera enviar una foto.`;
     diagResult.hidden = false;
   };
 
   const renderSizes = () => {
     sizeChoices.replaceChildren();
-    state.size = null;
-    sizeStep.disabled = !state.zone;
-    if (!state.zone) {
+    diagnosis.size = null;
+    sizeStep.disabled = !diagnosis.zone;
+    if (!diagnosis.zone) {
       const note = document.createElement("span");
       note.className = "console-status";
       note.textContent = "Selecciona primero una zona.";
@@ -135,7 +162,7 @@
       renderResult();
       return;
     }
-    sizeOptions[state.type].forEach(([value, label]) => {
+    sizeOptions[diagnosis.type].forEach(([value, label]) => {
       const button = document.createElement("button");
       button.type = "button";
       button.className = "choice";
@@ -143,8 +170,8 @@
       button.setAttribute("aria-pressed", "false");
       button.textContent = label;
       button.addEventListener("click", () => {
-        state.size = value;
-        setPressed(selectAll("[data-size]", sizeChoices), "size", value);
+        diagnosis.size = value;
+        setPressed($$("[data-size]", sizeChoices), "size", value);
         renderResult();
       });
       sizeChoices.append(button);
@@ -152,167 +179,118 @@
     renderResult();
   };
 
-  const scrollToDiagnosticSection = () => {
-    document.getElementById("diagnostico").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-  };
-
-  const playHeroInspection = (button) => {
-    const runId = ++inspectionRun;
-    heroProgress.classList.remove("is-advancing", "is-advanced");
-    const selectedLabel = button.querySelector("strong").textContent;
-    heroProgress.setAttribute("aria-label", `Progreso del diagnóstico, paso 2 de 3; tipo de daño seleccionado: ${selectedLabel}`);
-    heroAssessmentStatus.textContent = `Tipo de daño seleccionado: ${selectedLabel}. Continúa indicando la zona del parabrisas.`;
-    void heroProgress.offsetWidth;
-    heroProgress.classList.add("is-advancing");
-
-    if (reduceMotion || !window.matchMedia("(min-width: 901px)").matches) {
-      heroProgress.classList.add("is-advanced");
-      return Promise.resolve();
-    }
-
-    inspectionAnimation?.cancel();
-    inspectionMarker.hidden = false;
-    const frameRect = desktopHero.getBoundingClientRect();
-    const sourceRect = button.querySelector(".damage-graphic").getBoundingClientRect();
-    const targetRect = heroProgress.querySelector(".progress-step:nth-child(2) .step-dot").getBoundingClientRect();
-    const markerSize = inspectionMarker.getBoundingClientRect().width;
-    const startX = sourceRect.left + sourceRect.width / 2 - frameRect.left - markerSize / 2;
-    const startY = sourceRect.top + sourceRect.height / 2 - frameRect.top - markerSize / 2;
-    const endX = targetRect.left + targetRect.width / 2 - frameRect.left - markerSize / 2;
-    const endY = targetRect.top + targetRect.height / 2 - frameRect.top - markerSize / 2;
-
-    inspectionAnimation = inspectionMarker.animate([
-      { transform: `translate(${startX}px, ${startY}px) scale(.72)`, opacity: .15, offset: 0 },
-      { transform: `translate(${startX}px, ${startY}px) scale(1)`, opacity: 1, offset: .12 },
-      { transform: `translate(${endX + 8}px, ${endY - 5}px) scale(1.12)`, opacity: 1, offset: .72 },
-      { transform: `translate(${endX - 3}px, ${endY + 2}px) scale(.96)`, opacity: 1, offset: .88 },
-      { transform: `translate(${endX}px, ${endY}px) scale(1)`, opacity: 1, offset: 1 }
-    ], { duration: 720, easing: "cubic-bezier(.16, 1, .3, 1)", fill: "forwards" });
-
-    return inspectionAnimation.finished.catch(() => {}).then(() => {
-      if (runId !== inspectionRun) return;
-      heroProgress.classList.add("is-advanced");
-      inspectionMarker.hidden = true;
-    });
-  };
-
-  const setType = (type, scrollToDiagnostic = false, sourceButton = null) => {
-    state.type = type;
+  const setType = (type, moveToGuide = false) => {
+    diagnosis.type = type;
     setPressed(diagTypeButtons, "diagType", type);
-    setPressed(damageTypeButtons, "damageType", type);
-    damageTypeButtons.forEach((button) => button.classList.toggle("is-selected", button.dataset.damageType === type));
+    setPressed(heroTypeButtons, "damageType", type);
+    heroTypeButtons.forEach((button) => button.classList.toggle("is-selected", button.dataset.damageType === type));
     renderSizes();
-    if (scrollToDiagnostic) {
-      if (sourceButton?.classList.contains("damage-card")) playHeroInspection(sourceButton).then(scrollToDiagnosticSection);
-      else scrollToDiagnosticSection();
+    if (moveToGuide) {
+      $("#diagnostico").scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth", block: "start" });
     }
   };
 
   diagTypeButtons.forEach((button) => button.addEventListener("click", () => setType(button.dataset.diagType)));
-  damageTypeButtons.forEach((button) => button.addEventListener("click", () => setType(button.dataset.damageType, true, button)));
+  heroTypeButtons.forEach((button) => button.addEventListener("click", () => setType(button.dataset.damageType, true)));
   zoneButtons.forEach((button) => button.addEventListener("click", () => {
-    state.zone = button.dataset.zone;
-    setPressed(zoneButtons, "zone", state.zone);
+    diagnosis.zone = button.dataset.zone;
+    setPressed(zoneButtons, "zone", diagnosis.zone);
     renderSizes();
   }));
-  document.getElementById("resetDiag").addEventListener("click", () => {
-    state.type = "piquete";
-    state.zone = null;
-    state.size = null;
-    setPressed(diagTypeButtons, "diagType", state.type);
-    setPressed(damageTypeButtons, "damageType", state.type);
+  $("#resetDiag").addEventListener("click", () => {
+    diagnosis.type = "piquete";
+    diagnosis.zone = null;
+    diagnosis.size = null;
+    setPressed(diagTypeButtons, "diagType", diagnosis.type);
+    setPressed(heroTypeButtons, "damageType", diagnosis.type);
+    heroTypeButtons.forEach((button) => button.classList.toggle("is-selected", button.dataset.damageType === diagnosis.type));
     setPressed(zoneButtons, "zone", null);
     renderSizes();
     diagTypeButtons[0].focus();
   });
   renderSizes();
 
-  const comparePanel = document.getElementById("comparePanel");
-  const compareRange = document.getElementById("compareRange");
-  const compareTabs = selectAll("[data-compare-case]");
-  const compareCases = {
-    impacto: ["Piquete estabilizado", "La resina ocupa la cavidad y ayuda a detener la propagación. Puede quedar una marca leve: la prioridad es recuperar estabilidad y evitar que el daño avance."],
-    linea: ["Trizadura corta contenida", "Una grieta corta puede ser evaluada para reparación según su profundidad y ubicación. La demostración no garantiza que una trizadura específica sea reparable."]
-  };
-  const setComparePosition = (value) => comparePanel.style.setProperty("--compare-position", `${value}%`);
-  compareRange.addEventListener("input", () => setComparePosition(compareRange.value));
-  const selectCompareCase = (button) => {
-    compareTabs.forEach((tab) => {
-      const selected = tab === button;
-      tab.setAttribute("aria-selected", String(selected));
-      tab.tabIndex = selected ? 0 : -1;
-    });
-    comparePanel.setAttribute("aria-labelledby", button.id);
-    const [title, text] = compareCases[button.dataset.compareCase];
-    document.getElementById("compareCaseTitle").textContent = title;
-    document.getElementById("compareCaseText").textContent = text;
-    comparePanel.dataset.case = button.dataset.compareCase;
-  };
-  compareTabs.forEach((button, index) => {
-    button.addEventListener("click", () => selectCompareCase(button));
-    button.addEventListener("keydown", (event) => {
-      if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
-      event.preventDefault();
-      const direction = event.key === "ArrowRight" ? 1 : -1;
-      const next = compareTabs[(index + direction + compareTabs.length) % compareTabs.length];
-      next.focus();
-      selectCompareCase(next);
-    });
-  });
-  setComparePosition(compareRange.value);
+  const repairStory = $("#repairStory");
+  const repairFigure = $("#repairFigure");
+  const repairStageLabel = $("#repairStageLabel");
+  const repairChapters = $$("[data-story-stage]");
+  const stageLabels = ["Antes", "Intervención", "Después"];
+  let storyFrame;
 
-  const galleryOptions = selectAll("[data-gallery]");
-  const galleryVisual = document.querySelector(".gallery-visual");
-  const galleryContent = {
-    impacto: "Diagrama de un piquete localizado",
-    linea: "Diagrama de una trizadura lineal",
-    cambio: "Diagrama de un reemplazo completo"
+  const updateStory = () => {
+    storyFrame = null;
+    if (reducedMotion.matches || mobileLayout.matches) return;
+    const rect = repairStory.getBoundingClientRect();
+    const available = Math.max(1, repairStory.offsetHeight - window.innerHeight);
+    const progress = Math.min(1, Math.max(0, -rect.top / available));
+    const stage = progress < .34 ? 0 : progress < .68 ? 1 : 2;
+    repairFigure.dataset.stage = String(stage);
+    repairFigure.style.setProperty("--story-progress", progress.toFixed(3));
+    repairStageLabel.textContent = stageLabels[stage];
+    repairChapters.forEach((chapter) => chapter.classList.toggle("is-active", Number(chapter.dataset.storyStage) === stage));
   };
-  const selectGallery = (button) => {
-    galleryOptions.forEach((option) => {
-      const selected = option === button;
-      option.setAttribute("aria-selected", String(selected));
-      option.tabIndex = selected ? 0 : -1;
-    });
-    galleryVisual.setAttribute("aria-labelledby", button.id);
-    galleryVisual.dataset.galleryCase = button.dataset.gallery;
-    document.getElementById("galleryCaption").textContent = galleryContent[button.dataset.gallery];
+  const requestStoryUpdate = () => {
+    if (storyFrame) return;
+    storyFrame = requestAnimationFrame(updateStory);
   };
-  galleryOptions.forEach((button, index) => {
-    button.addEventListener("click", () => selectGallery(button));
-    button.addEventListener("focus", () => selectGallery(button));
-    button.addEventListener("keydown", (event) => {
-      if (!["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) return;
-      event.preventDefault();
-      const forward = event.key === "ArrowDown" || event.key === "ArrowRight";
-      const next = galleryOptions[(index + (forward ? 1 : -1) + galleryOptions.length) % galleryOptions.length];
-      next.focus();
-    });
-  });
-  if (window.matchMedia("(hover: hover) and (min-width: 761px)").matches) {
-    galleryOptions.forEach((button) => button.addEventListener("pointerenter", () => selectGallery(button)));
-  }
-  selectGallery(galleryOptions[0]);
+  window.addEventListener("scroll", requestStoryUpdate, { passive: true });
+  window.addEventListener("resize", requestStoryUpdate);
+  reducedMotion.addEventListener?.("change", requestStoryUpdate);
+  mobileLayout.addEventListener?.("change", requestStoryUpdate);
+  updateStory();
 
-  const businessForm = document.getElementById("businessForm");
-  const formStatus = document.getElementById("formStatus");
+  const businessForm = $("#businessForm");
+  const formStatus = $("#formStatus");
   businessForm.addEventListener("submit", (event) => {
     event.preventDefault();
     if (!businessForm.checkValidity()) {
       businessForm.reportValidity();
       return;
     }
-    formStatus.textContent = "Vista previa: el envío aún no está conectado. Conserva estos datos y contacta a Soimar cuando el canal oficial esté confirmado.";
+    formStatus.textContent = "Vista previa: esta solicitud no se envía";
     formStatus.hidden = false;
-    formStatus.focus?.();
+    formStatus.focus();
   });
 
-  const mapViewport = document.getElementById("mapViewport");
-  let mapScale = 1;
-  const setMapScale = (next) => {
-    mapScale = Math.min(1.35, Math.max(1, next));
-    mapViewport.style.setProperty("--map-scale", mapScale.toFixed(2));
+  const galleryGrid = $("#galleryGrid");
+  const galleryEmpty = $("#galleryEmpty");
+  const renderGallery = (items) => {
+    if (!Array.isArray(items) || items.length === 0) return;
+    const fragment = document.createDocumentFragment();
+    items.forEach((item) => {
+      if (!item || typeof item.image !== "string" || typeof item.description !== "string") return;
+      const figure = document.createElement("figure");
+      figure.className = "gallery-card";
+      const image = document.createElement("img");
+      image.src = item.image;
+      image.alt = item.alt || item.description;
+      image.loading = "lazy";
+      const caption = document.createElement("figcaption");
+      caption.textContent = [item.type, item.description, item.date].filter(Boolean).join(" · ");
+      figure.append(image, caption);
+      fragment.append(figure);
+    });
+    if (!fragment.childNodes.length) return;
+    galleryGrid.append(fragment);
+    galleryGrid.hidden = false;
+    galleryGrid.style.display = "grid";
+    galleryEmpty.hidden = true;
   };
-  document.getElementById("mapZoomIn").addEventListener("click", () => setMapScale(mapScale + .1));
-  document.getElementById("mapZoomOut").addEventListener("click", () => setMapScale(mapScale - .1));
+  fetch("assets/data/gallery.json")
+    .then((response) => response.ok ? response.json() : [])
+    .then(renderGallery)
+    .catch(() => {});
+
+  const showMap = $("#showMap");
+  const workshopMap = $("#workshopMap");
+  const mapFallback = $("#mapFallback");
+  const mapAddress = $("#mapAddress");
+  showMap.addEventListener("click", () => {
+    workshopMap.hidden = false;
+    mapAddress.hidden = false;
+    mapFallback.hidden = true;
+    workshopMap.focus();
+  });
+
+  window.__soimarTest = { getVerdict };
 })();

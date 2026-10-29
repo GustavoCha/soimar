@@ -1,111 +1,156 @@
 ---
 name: "Soimar Parabrisas"
-description: "Precisión laminada para orientar decisiones sobre vidrio automotriz con claridad y confianza."
+description: "Precisión laminada de Valparaíso para orientar decisiones sobre vidrio automotriz con claridad y confianza."
 colors:
-  ink: "#0b1720"
-  ink-soft: "#263a48"
-  steel: "#6f8999"
-  glass: "#e7f7ff"
-  signal-amber: "#f8b829"
-  paper: "#f6fafc"
-  mineral-charcoal: "#1b272b"
-  glass-white: "#f4f8fa"
-  focus-blue: "#0878ad"
-  state-repair: "#19704d"
-  state-evaluate: "#c07a00"
-  state-replace: "#a53a32"
+  ink: "#0b1820"
+  ink-soft: "#243a45"
+  steel-line: "#78929d"
+  glass: "#e7f4f7"
+  glass-deep: "#cfe6ec"
+  service-green: "#0b7b45"
+  service-green-dark: "#075b35"
+  signal-amber: "#f5b82e"
+  paper: "#f5f8f7"
+  mineral-charcoal: "#132328"
+  glass-white: "#f5faf9"
+  focus-green: "#4bd08a"
+  state-evaluate: "#bd7900"
+  state-replace: "#a83a32"
 typography:
   display:
     fontFamily: "Bakbak One, sans-serif"
-    fontSize: "clamp(2.7rem, 6vw, 6rem)"
+    fontSize: "clamp(4.25rem, 7vw, 6rem)"
+    fontWeight: 400
+    lineHeight: 0.88
+    letterSpacing: "-0.04em"
+  headline:
+    fontFamily: "Bakbak One, sans-serif"
+    fontSize: "clamp(3rem, 5.2vw, 5.75rem)"
     fontWeight: 400
     lineHeight: 0.94
-    letterSpacing: "-0.03em"
+    letterSpacing: "-0.035em"
   title:
     fontFamily: "Bakbak One, sans-serif"
     fontSize: "2rem"
     fontWeight: 400
     lineHeight: 1
-    letterSpacing: "-0.02em"
   body:
     fontFamily: "Archivo, sans-serif"
-    fontSize: "1rem"
+    fontSize: "18px"
     fontWeight: 400
-    lineHeight: 1.62
+    lineHeight: 1.55
+  body-mobile:
+    fontFamily: "Archivo, sans-serif"
+    fontSize: "16px"
+    fontWeight: 400
+    lineHeight: 1.55
   label:
+    fontFamily: "Archivo, sans-serif"
+    fontSize: "1rem"
+    fontWeight: 700
+    lineHeight: 1.2
+  metadata:
     fontFamily: "Archivo, sans-serif"
     fontSize: "0.85rem"
     fontWeight: 600
-    lineHeight: 1.15
-    letterSpacing: "0.03em"
+    lineHeight: 1.2
 rounded:
-  selector: "5px"
-  label: "6px"
+  badge: "6px"
+  stage-label: "7px"
   field: "8px"
   control: "9px"
   action: "10px"
+  card: "12px"
+  media: "14px"
   panel: "16px"
+  windshield: "58px 58px 26px 26px"
+  windshield-mobile: "45px 45px 22px 22px"
   pill: "999px"
 spacing:
-  xs: "0.4rem"
-  sm: "0.65rem"
+  xs: "0.45rem"
+  sm: "0.7rem"
   md: "1rem"
   lg: "1.5rem"
   xl: "2.5rem"
   2xl: "3.5rem"
 components:
-  button-signal:
-    backgroundColor: "{colors.signal-amber}"
-    textColor: "{colors.ink}"
+  button-primary:
+    backgroundColor: "{colors.service-green}"
+    textColor: "#ffffff"
+    typography: "{typography.label}"
     rounded: "{rounded.action}"
     padding: "0.8rem 1.1rem"
-    height: "50px"
+    height: "52px"
+  button-primary-hover:
+    backgroundColor: "{colors.service-green-dark}"
+    textColor: "#ffffff"
     typography: "{typography.label}"
+    rounded: "{rounded.action}"
+    padding: "0.8rem 1.1rem"
+    height: "52px"
   button-secondary:
     backgroundColor: "transparent"
     textColor: "{colors.ink}"
+    typography: "{typography.label}"
     rounded: "{rounded.action}"
     padding: "0.8rem 1.1rem"
-    height: "50px"
-    typography: "{typography.label}"
+    height: "52px"
   choice-default:
-    backgroundColor: "{colors.paper}"
+    backgroundColor: "#f9fcfc"
     textColor: "{colors.ink}"
     rounded: "{rounded.control}"
-    padding: "0.65rem 0.9rem"
-    height: "46px"
+    padding: "0.7rem 2.55rem 0.7rem 1rem"
+    height: "48px"
   choice-selected:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.glass-white}"
+    backgroundColor: "{colors.service-green}"
+    textColor: "#ffffff"
     rounded: "{rounded.control}"
-    padding: "0.65rem 0.9rem"
-    height: "46px"
+    padding: "0.7rem 2.55rem 0.7rem 1rem"
+    height: "48px"
   input-field:
-    backgroundColor: "{colors.paper}"
+    backgroundColor: "#f8fbfb"
     textColor: "{colors.ink}"
+    typography: "{typography.body-mobile}"
     rounded: "{rounded.field}"
-    padding: "0.75rem 0.8rem"
-    height: "46px"
-    typography: "{typography.body}"
-  navigation-dark:
+    padding: "0.75rem 0.85rem"
+    height: "48px"
+  navigation-desktop:
     backgroundColor: "{colors.mineral-charcoal}"
     textColor: "{colors.glass-white}"
-    padding: "0 4rem"
+    padding: "0.75rem 4.5rem"
+    height: "78px"
+  navigation-mobile:
+    backgroundColor: "{colors.mineral-charcoal}"
+    textColor: "{colors.glass-white}"
+    padding: "0.6rem 1rem"
     height: "68px"
+  damage-selector:
+    backgroundColor: "rgba(255, 255, 255, 0.66)"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.card}"
+    padding: "1rem"
+    height: "228px"
   diagnostic-panel:
     backgroundColor: "{colors.glass}"
     textColor: "{colors.ink}"
     rounded: "{rounded.panel}"
-    padding: "1.25rem"
-  damage-selector:
-    backgroundColor: "rgba(221, 241, 250, 0.36)"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.selector}"
-    padding: "0.5rem 1.0625rem"
-  service-index:
-    backgroundColor: "{colors.glass}"
-    textColor: "{colors.ink}"
-    padding: "0.875rem 1.3rem"
+    padding: "1.35rem"
+  story-frame:
+    backgroundColor: "#a8c7d1"
+    textColor: "#ffffff"
+    rounded: "{rounded.panel}"
+    padding: "1rem"
+  gallery-empty:
+    backgroundColor: "#1b3037"
+    textColor: "{colors.glass-white}"
+    rounded: "{rounded.panel}"
+    padding: "2rem"
+  route-option:
+    backgroundColor: "transparent"
+    textColor: "{colors.glass-white}"
+    rounded: "{rounded.control}"
+    padding: "0.75rem 0.9rem"
+    height: "50px"
 ---
 
 # Design System: Soimar Parabrisas
@@ -114,49 +159,58 @@ components:
 
 **Creative North Star: "Precisión laminada"**
 
-El sistema toma su carácter del propio parabrisas: carbón mineral como estructura, blanco vidrio como campo de lectura, azul laminado como atmósfera y ámbar señal como instrucción inequívoca. Se siente técnico y cercano a la vez; la precisión aparece en líneas regladas, estados explícitos, bordes finos y anotaciones legibles, no en una estética fría o corporativa.
+El sistema habla desde el mundo del parabrisas y desde Valparaíso: carbón mineral como estructura, vidrio azul-blanco como campo de lectura, verde de servicio para actuar y ámbar de señal para explicar el proceso técnico. La precisión se expresa con reglas finas, estados explícitos, geometría de vidrio y una voz editorial directa; el resultado debe sentirse profesional y cercano, nunca genérico ni frío.
 
-La mayor parte de la interfaz permanece plana y luminosa para que el contenido se pueda escanear con rapidez. Las superficies oscuras señalan contexto de taller o inspección; el ámbar guía una decisión o confirma una selección. La composición exacta del parabrisas del hero pertenece a esa superficie y no es una plantilla global: lo durable es el lenguaje material, el ritmo y la claridad de estado.
+La V3 incorpora fotografía editorial de Valparaíso en el hero y un relato de reparación antes/intervención/después dentro de un encuadre estable. Las imágenes explicativas generadas se rotulan como tales; la galería de trabajos queda reservada a evidencia real y muestra un empty state honesto cuando no hay material autorizado. La composición exacta del hero y el comportamiento sticky pertenecen a esta superficie, mientras que la paleta, la tipografía, las reglas, los estados y la geometría forman el sistema reusable.
 
 **Key Characteristics:**
 
-- Contraste entre estructura mineral oscura y campos de vidrio azul-blanco.
-- Ámbar escaso, funcional y siempre asociado a acción, avance o selección.
-- Información organizada con reglas finas, índices y estados visibles.
-- Controles rectangulares compactos; curvas amplias solo cuando describen vidrio o contenedores mayores.
-- Un único gesto de movimiento amortiguado para la inspección; el resto responde de inmediato.
+- Verde de servicio para CTA, selección y confirmación; ámbar únicamente para señal técnica y proceso.
+- Bakbak One compacta la voz editorial; Archivo sostiene lectura, controles y orientación.
+- Cuerpo de 18px en escritorio y 16px en móvil, con etiquetas de acción de al menos 16px.
+- Contraste entre superficies de carbón y campos de vidrio azul-blanco organizados por reglas.
+- Relato visual continuo antes/intervención/después, con imágenes generadas claramente rotuladas.
+- Galería auténtica con empty state y ubicación resuelta desde una dirección legible.
 
 ## Colors
 
-La paleta combina neutros azulados de vidrio y acero con un acento ámbar de señalización; los verdes, ocres y rojos aparecen únicamente como estados diagnósticos.
+La paleta conserva el lenguaje de vidrio y taller, pero separa con rigor el verde de servicio del ámbar de proceso.
 
 ### Primary
 
-- **Ámbar señal:** Acción primaria, selección activa, avance del diagnóstico y superficies de proceso que necesitan prioridad inmediata.
-- **Azul de foco:** Contorno de teclado, cursor y estados de interacción que deben distinguirse del acento de acción.
+- **Verde de servicio:** CTA, selección activa, confirmación de reparación y acentos de interacción.
+- **Verde de servicio profundo:** Hover y estados presionados de acciones verdes.
+- **Verde de foco:** Contorno de teclado y superficies del navegador que necesitan máxima visibilidad.
 
 ### Secondary
 
-- **Azul laminado:** Campos amplios, mapas de parabrisas y fondos explicativos donde la transparencia del vidrio debe sentirse sin usar desenfoque.
-- **Acero reglado:** Bordes, divisores, rieles y anotaciones de baja jerarquía.
+- **Vidrio laminado:** Consolas, mapas de parabrisas y superficies explicativas luminosas.
+- **Vidrio profundo:** Hover de acciones secundarias y capas de apoyo.
+- **Acero reglado:** Bordes, separadores, rieles y anotaciones de baja jerarquía.
+
+### Tertiary
+
+- **Ámbar de proceso:** Fondo y nodos de la secuencia técnica; no es color de CTA ni de selección.
 
 ### Neutral
 
-- **Tinta mineral:** Texto principal y estados seleccionados de alto contraste.
-- **Tinta suave:** Texto secundario sobre fondos claros.
-- **Carbón de taller:** Navegación, secciones inmersivas y contenedores de formularios oscuros.
-- **Blanco vidrio:** Texto sobre carbón y superficies muy claras.
-- **Papel frío:** Fondo base y campos de formulario.
+- **Tinta mineral:** Texto principal y diagramas de daño.
+- **Tinta suave:** Texto explicativo sobre fondos claros.
+- **Carbón de taller:** Navegación, diagnóstico, galería, taller y footer.
+- **Blanco vidrio:** Texto sobre carbón y superficies de máxima luz.
+- **Papel frío:** Fondo base de lectura.
 
 ### States
 
-- **Reparar:** Marca positiva de una orientación potencialmente reparable.
-- **Evaluar:** Indica incertidumbre técnica o validación pendiente.
-- **Cambiar:** Señala una orientación hacia reemplazo; no se usa como decoración.
+- **Reparar:** Usa verde de servicio junto con etiqueta y explicación.
+- **Evaluar:** Usa ocre de evaluación junto con lenguaje de incertidumbre.
+- **Cambiar:** Usa rojo de reemplazo junto con etiqueta y próxima acción.
 
-**The Signal Amber Rule.** El ámbar siempre hace una de tres cosas: invita a actuar, confirma una selección o muestra avance. Su rareza conserva su fuerza.
+**The Service Green Rule.** El verde gobierna CTA, selección, foco funcional y confirmación positiva; nunca depende solo del color para comunicar estado.
 
-**The Explicit State Rule.** Los veredictos nunca dependen solo del color: borde, etiqueta y texto deben expresar el mismo estado.
+**The Process Amber Rule.** El ámbar pertenece a la secuencia técnica y sus nodos. No se usa en botones primarios, selectores ni campos enfocados.
+
+**The Explicit State Rule.** Reparar, evaluar y cambiar siempre combinan color, borde, etiqueta y texto explicativo.
 
 ## Typography
 
@@ -164,112 +218,131 @@ La paleta combina neutros azulados de vidrio y acero con un acento ámbar de se�
 
 **Body Font:** Archivo (con `sans-serif` como respaldo)
 
-**Character:** Bakbak One aporta la masa compacta y automotriz de los titulares; Archivo mantiene instrucciones, controles y texto técnico calmados y muy legibles. La diferencia entre ambas familias reemplaza adornos innecesarios.
+**Character:** Bakbak One aporta masa compacta, ritmo editorial y una referencia automotriz propia. Archivo mantiene instrucciones, controles, datos y orientación serenos y legibles.
 
 ### Hierarchy
 
-- **Display** (400, escala fluida hasta 6rem, interlínea 0.94): titulares de sección breves y equilibrados; evitar párrafos o etiquetas largas.
-- **Title** (400, 2rem, interlínea 1): títulos de panel, resultados, preguntas y componentes de primer nivel.
-- **Body** (400, 1rem, interlínea 1.62): explicación y orientación; mantener medidas habituales de 62–72 caracteres.
-- **Label** (600, 0.85rem, tracking 0.03em): estados, metadatos y controles compactos. Las mayúsculas espaciadas quedan reservadas para avisos reglados y rótulos cortos.
+- **Display** (400, `clamp(4.25rem, 7vw, 6rem)`, interlínea 0.88): titular editorial del hero; máximo 6rem y tracking no menor que `-0.04em`.
+- **Headline** (400, `clamp(3rem, 5.2vw, 5.75rem)`, interlínea 0.94): titulares de sección breves, equilibrados y de hasta 15 caracteres de ancho aproximado.
+- **Title** (400, 2rem, interlínea 1): paneles, resultados, preguntas y componentes principales.
+- **Body** (400, 18px escritorio / 16px móvil, interlínea 1.55): explicación y orientación; el texto prolongado se mantiene cerca de 65–70 caracteres.
+- **Label** (600–700, mínimo 16px en controles): acciones, opciones, navegación y campos. Metadatos y captions pueden bajar a 0.82–0.9rem cuando no son la etiqueta accionable.
 
-**The Two-Voice Rule.** Bakbak One habla en títulos; Archivo explica y opera. No usar la display como sustituto de texto técnico o cuerpo.
+**The Two-Voice Rule.** Bakbak One habla en titulares; Archivo explica y opera. La display no sustituye cuerpo, metadatos ni instrucciones.
 
-**The Controlled Compression Rule.** El tracking negativo se limita a títulos grandes y nunca supera `-0.04em`; no convertir la compresión específica del hero en una regla tipográfica general.
+**The Readable Control Rule.** La etiqueta accionable de un control no baja de 16px; el texto auxiliar dentro del mismo control puede ser menor si conserva contraste y jerarquía.
 
 ## Layout
 
-Las secciones usan un contenedor centrado de hasta 1380px y padding exterior fluido (`clamp(5rem, 9vw, 9rem)` vertical; `clamp(1.25rem, 5vw, 5.5rem)` horizontal). Los grupos internos alternan rejillas asimétricas de dos columnas con listas regladas a ancho completo; los espacios entre bloques se mueven habitualmente entre 2.5rem y 3.5rem.
+Las secciones usan un contenedor centrado de hasta 1320px y padding fluido (`clamp(5.5rem, 9vw, 9rem)` vertical; `clamp(1.25rem, 5vw, 5rem)` horizontal). El hero amplía el lienzo hasta 1440px y organiza copy editorial más diagnóstico en una rejilla asimétrica; esta composición pasa a una sola columna a 960px.
 
-A 1000px, las rejillas de diagnóstico, comparación, galería, empresas, confianza y taller pasan a una columna. A 900px, la composición superpuesta del hero se reemplaza por una experiencia móvil propia con cabecera fija de 68px. A 760px, índices y procesos se apilan, el padding de sección baja a 4.5rem × 1rem y los controles conservan objetivos táctiles de al menos 44px.
+La cabecera sticky mide 78px en escritorio y 68px desde 960px hacia abajo. A 1180px la navegación puede ocupar una segunda fila; a 960px se convierte en menú desplegable de ancho completo. A 720px el cuerpo pasa a 16px, las elecciones del hero se apilan, la galería se reduce a una columna y el relato de reparación deja de depender del sticky.
 
-**The Ruled Flow Rule.** Cuando varios elementos equivalentes forman una secuencia o índice, organizarlos con líneas y ritmo vertical antes que encerrarlos en una cuadrícula de tarjetas iguales.
+El relato de reparación mantiene el mismo encuadre visual mientras los capítulos avanzan; en escritorio combina una figura sticky con tres capítulos largos. La galería usa una retícula de 12 columnas cuando existen imágenes reales y un empty state dividido cuando la fuente está vacía. El taller usa una rejilla mapa/información y localiza por la dirección confirmada, no por coordenadas inventadas.
 
-**The Surface-Specific Hero Rule.** La superposición sobre el parabrisas, sus coordenadas y su escala pertenecen al hero de Soimar; no deben convertirse en una plantilla para nuevas pantallas.
+**The Ruled Flow Rule.** Cuando varios elementos equivalentes forman una secuencia o índice, organizarlos con líneas y ritmo antes que encerrarlos en tarjetas iguales.
+
+**The Surface-Specific Hero Rule.** La fotografía de Valparaíso, la rejilla copy/diagnóstico y sus proporciones pertenecen al hero de Soimar; no son una plantilla global para cualquier pantalla.
+
+**The Stable Frame Rule.** En relatos de transformación, conservar encuadre y escala entre etapas para que el cambio sea legible sin comparación artificial.
 
 ## Elevation & Depth
 
-El sistema es plano por defecto. La profundidad se construye primero con contraste tonal, bordes de 1px y capas de carbón/vidrio; las sombras aparecen solo cuando una superficie debe mantenerse por encima del flujo o concentrar una tarea.
+El sistema es plano por defecto. La profundidad se construye primero con contraste tonal, reglas de 1px y alternancia carbón/vidrio; las sombras se reservan para superficies que concentran una tarea o permanecen visualmente ancladas durante el scroll.
 
 ### Shadow Vocabulary
 
-- **Acción:** `0 8px 20px rgba(0, 0, 0, 0.16)` para la llamada principal sobre una imagen o campo complejo.
-- **Cabecera elevada:** `0 10px 25px rgba(0, 0, 0, 0.28)` para navegación que se despega del parabrisas.
-- **Consola de inspección:** `0 26px 65px rgba(0, 0, 0, 0.25)` para el flujo diagnóstico principal.
-- **Panel de tarea:** `0 24px 60px rgba(0, 0, 0, 0.18)` para formularios oscuros que concentran una acción.
+- **Diagnóstico del hero:** `0 24px 70px rgba(0, 0, 0, 0.18)` para separar la orientación de la fotografía editorial.
+- **Consola de inspección:** `0 30px 80px rgba(0, 0, 0, 0.28)` para el flujo diagnóstico principal.
+- **Relato sticky:** `0 28px 70px rgba(0, 0, 0, 0.20)` para fijar el encuadre durante la narración.
+- **Panel técnico:** `0 22px 55px rgba(0, 0, 0, 0.14)` para una tarea secundaria sobre vidrio claro.
+- **Panel empresarial:** `0 26px 65px rgba(0, 0, 0, 0.18)` para concentrar el formulario sobre carbón.
 
-**The Flat-by-Default Rule.** Una línea, un cambio tonal o una sombra resuelve la separación; no acumular borde y sombra suave en tarjetas ordinarias.
+**The Flat-by-Default Rule.** Una regla, un cambio tonal o una sombra resuelve la separación; no acumular borde y sombra ambiental en contenedores ordinarios.
 
 ## Shapes
 
-Los controles usan rectángulos compactos de 5–10px de radio. Los paneles de tarea y escenas usan 14–16px. Los círculos se reservan para pasos, marcadores, pines y estados puntuales; las píldoras no son una forma de contenedor general.
+Los campos y controles usan esquinas de 8–10px; los selectores visuales usan 12px; imágenes y paneles de tarea usan 14–16px. Los círculos se reservan para pasos, radios, estados y marcas funcionales. Las píldoras quedan limitadas a superficies del navegador como el scrollbar, no a contenedores de contenido.
 
-La silueta excepcional del parabrisas usa esquinas superiores amplias y base más tensa (48px 48px 28px 28px), acompañada por frit de puntos y reglas internas. Esa forma está autorizada cuando el componente representa vidrio automotriz, no como máscara decorativa genérica.
+La silueta excepcional del mapa de parabrisas usa esquinas superiores amplias y una base más tensa (`58px 58px 26px 26px`; `45px 45px 22px 22px` en móvil), acompañada por frit de puntos y reglas internas. Esa forma se usa cuando el componente representa vidrio automotriz, nunca como máscara decorativa genérica.
 
-**The Glass Geometry Rule.** Las curvas grandes describen vidrio, mapa o escena; los controles permanecen recortados y precisos.
+**The Glass Geometry Rule.** Las curvas grandes describen vidrio, mapa o escena; los controles permanecen recortados, táctiles y precisos.
 
 ## Components
 
 ### Buttons
 
-- **Shape:** Rectángulo compacto con esquinas de 8–10px y altura mínima de 50px.
-- **Primary:** Ámbar señal sobre tinta mineral, peso 700 y padding 0.8rem × 1.1rem. El hover aclara el ámbar; el foco usa un contorno azul visible separado del borde.
-- **Secondary:** Fondo transparente, borde de 1px y tinta mineral. En superficies oscuras, texto blanco vidrio y borde de acero claro.
-- **Disabled:** Reduce opacidad a 0.55 y cambia el cursor; la etiqueta debe seguir siendo legible.
+- **Shape:** Rectángulo compacto con radio de 10px, altura mínima de 52px y etiqueta de al menos 16px.
+- **Primary:** Verde de servicio con texto blanco, peso 700 y padding 0.8rem × 1.1rem. Hover profundiza el verde; `:active` puede desplazar 1px. La etiqueta nombra la acción real: mientras no exista número oficial, se prepara o copia un mensaje y no se promete envío.
+- **Secondary:** Fondo transparente, borde de tinta suave y texto tinta. Hover usa vidrio profundo.
+- **Focus / Disabled:** Foco verde brillante de 3px con offset de 4px; disabled conserva legibilidad con opacidad 0.52.
 
 ### Chips
 
-- **Style:** Selectores de 46px de alto, fondo papel, borde de acero y radio de 9px.
-- **State:** Hover oscurece el borde; selección invierte a tinta mineral con texto blanco vidrio. En el mapa del parabrisas, la selección usa ámbar para mantener continuidad con la señal de diagnóstico.
+- **Style:** Selectores de 48px de alto, fondo casi blanco, borde de acero, radio de 9px y etiqueta de al menos 16px.
+- **State:** Hover acerca el borde al verde; selección rellena verde, invierte el texto a blanco y muestra un check explícito.
 
 ### Cards / Containers
 
-- **Corner Style:** 14–16px en consolas y paneles; 5px en selectores visuales del hero.
-- **Background:** Vidrio claro para inspección, carbón para contexto de taller y papel para contenido general.
-- **Shadow Strategy:** Solo consolas o tareas elevadas; los índices se separan con reglas.
-- **Border:** 1px de acero o tinta azulada, con estados explícitos que sustituyen el color del borde.
-- **Internal Padding:** Entre 1.25rem y 2rem según la densidad del contenido.
+- **Corner Style:** 12px en selectores visuales; 14–16px en medios, consolas y paneles.
+- **Background:** Vidrio para orientación, carbón para contexto de taller y blanco translúcido sobre fotografía.
+- **Shadow Strategy:** Solo paneles de tarea, medios sticky o capas sobre imagen; los índices y listados usan reglas.
+- **Border:** 1px de acero; una selección puede subir a 3px sin alterar la geometría externa.
+- **Internal Padding:** Entre 1rem y 2.2rem según densidad y rol.
 
 ### Inputs / Fields
 
-- **Style:** Fondo papel frío, texto tinta, borde de acero, radio de 8px, altura mínima de 46px y padding 0.75rem × 0.8rem.
-- **Focus:** Borde y contorno de 2px en ámbar señal, con offset de 2px; el cursor usa azul de foco.
-- **Error / Disabled:** Los mensajes se colocan junto al campo o grupo afectado y explican recuperación; no se simula éxito cuando un canal no está conectado.
+- **Style:** Fondo blanco frío, texto tinta, borde de acero, radio de 8px, altura mínima de 48px y padding 0.75rem × 0.85rem.
+- **Focus:** Borde y contorno verde de 2px con offset de 2px; el caret también es verde.
+- **Error / Disabled:** El mensaje vive junto al grupo afectado y explica recuperación. Ningún formulario simula envío cuando el canal no está conectado.
 
 ### Navigation
 
-La navegación usa carbón de taller, texto blanco vidrio y 68px de alto. En escritorio, los enlaces se distribuyen en una sola línea y aclaran a ámbar al pasar el cursor; después del hero, la barra entra con una transición amortiguada. En móvil, el menú ocupa todo el ancho bajo la cabecera fija, conserva controles de al menos 44px y separa opciones con reglas finas.
+La cabecera sticky usa carbón, texto blanco vidrio y una regla inferior. Mide 78px en escritorio y 68px en layouts de hasta 960px. Los enlaces muestran una línea verde de 2px al hover/foco; en móvil, el menú cae bajo la cabecera y cada opción ofrece al menos 54px de alto.
+
+### Editorial Hero
+
+Una fotografía de Valparaíso vista a través del parabrisas ocupa el campo completo, con una veladura clara direccional que protege el contraste. El copy editorial queda separado del diagnóstico; no se rasteriza texto ni se incorpora la composición al asset fotográfico.
 
 ### Damage Selector
 
-Es una tarjeta-interruptor, no una tarjeta de contenido genérica. Combina diagrama lineal, nombre, descripción breve y un indicador circular; la selección se expresa con borde ámbar más grueso, indicador relleno y `aria-pressed`.
+Tarjeta-interruptor de 12px de radio con símbolo lineal, nombre, descriptor e indicador circular. La selección se expresa con borde verde de 3px, fondo claro, indicador relleno y `aria-pressed`; seleccionar continúa al diagnóstico con scroll suave o inmediato según la preferencia de movimiento.
 
 ### Diagnostic Console
 
-Contenedor de vidrio claro con cabecera reglada, pasos apilados y resultado final con borde superior de 8px. Reparar, evaluar y cambiar usan sus colores semánticos, siempre acompañados por una etiqueta y explicación textual.
+Contenedor de vidrio con cabecera reglada, pasos apilados y resultado con borde superior de 8px. Reparar usa verde; evaluar usa ocre; cambiar usa rojo. Cada resultado incluye badge, explicación y próxima acción.
 
-### Service Index
+### Repair Story
 
-Fila o celda reglada con número funcional, regla corta, título, descripción y flecha SVG. En páginas nuevas, reutilizar su lógica de índice solo cuando el número comunica secuencia o referencia; no numerar secciones por ornamento.
+Relato antes/intervención/después con una figura de proporción 16:10, etiqueta de etapa, progreso lineal y tres capítulos. Los frames cruzan opacidad y filtro durante 700ms con `cubic-bezier(.16, 1, .3, 1)`; el capítulo activo usa 500ms. En móvil y con movimiento reducido, el contenido se vuelve estático y los capítulos permanecen visibles. Toda imagen generada lleva un rótulo persistente que la separa del archivo real.
 
-### Inspection Motion
+### Work Gallery
 
-La firma de movimiento lleva un marcador desde el daño seleccionado hasta el segundo paso y acompaña el trayecto con un barrido del rail. Dura 720ms con `cubic-bezier(.16, 1, .3, 1)`, incluye un sobrepaso amortiguado y termina en estado explícito. Con movimiento reducido o en móvil, el estado avanza de inmediato sin animación. La línea del proceso permanece estática.
+La galería acepta únicamente trabajos reales verificados y autorizados, con imagen, descripción, fecha y tipo de intervención. Si la fuente persistente está vacía o falla, el empty state permanece visible y no se sustituye por imágenes generadas.
+
+### Workshop Location
+
+El mapa se consulta con la dirección confirmada y la repite en una etiqueta superpuesta al iframe y como texto en el panel contiguo. Las rutas a Google Maps, Waze y Apple Maps parten de la misma dirección; coordenadas o Place ID pendientes no se fabrican.
 
 ## Do's and Don'ts
 
 ### Do:
 
-- **Do** usar ámbar para una acción, selección o avance concreto, nunca como relleno ambiental.
-- **Do** organizar índices, servicios y preguntas con reglas finas y jerarquía tipográfica antes de añadir contenedores.
+- **Do** usar verde para CTA, selección, foco funcional y confirmación positiva.
+- **Do** reservar el ámbar para la señal técnica y la secuencia de proceso.
+- **Do** mantener cuerpo de 18px en escritorio, 16px en móvil y etiquetas accionables de al menos 16px.
+- **Do** rotular toda imagen generada y mantenerla separada de la galería de trabajos reales.
+- **Do** mostrar un empty state honesto cuando no existen fotografías verificadas.
+- **Do** resolver mapa y rutas desde la dirección confirmada y visible.
+- **Do** nombrar los controles de WhatsApp según su comportamiento real de preparar o copiar un mensaje mientras no exista número oficial.
 - **Do** mantener estados legibles por texto, forma y color, con foco visible y objetivos táctiles de al menos 44px.
-- **Do** usar Bakbak One para titulares breves y Archivo para lectura, instrucciones y controles.
-- **Do** conservar un solo momento de movimiento authored: el barrido amortiguado de inspección, con alternativa inmediata para movimiento reducido.
 
 ### Don't:
 
-- **Don't** convertir la composición, coordenadas o escala del hero del parabrisas en una regla global.
-- **Don't** estructurar páginas con filas repetidas de tarjetas iguales de icono, título y texto cuando una lista reglada comunica mejor la relación.
-- **Don't** usar degradado en texto, desenfoque de vidrio decorativo, halos sin offset o sombras duras de bloque.
-- **Don't** reemplazar iconos SVG coherentes por emoji o glifos Unicode.
-- **Don't** usar una curva de parabrisas, frit o diagramas de daño como decoración sin función semántica.
+- **Don't** usar ámbar como CTA, selección, foco o confirmación positiva.
+- **Don't** publicar imágenes generadas como si fueran trabajos reales ni ocultar su rótulo explicativo.
+- **Don't** inventar coordenadas, Place ID, fotografías, testimonios o datos comerciales pendientes.
+- **Don't** prometer que un mensaje se envía cuando el canal oficial todavía no está conectado.
+- **Don't** convertir la composición editorial del hero o el sticky de reparación en una plantilla global.
+- **Don't** estructurar páginas con cuadrículas repetidas de tarjetas iguales cuando una lista reglada comunica mejor la relación.
+- **Don't** usar degradado en texto, desenfoque decorativo, halos sin offset, sombras duras de bloque, emoji como icono o máscaras geométricas para imitar contornos fotográficos.
